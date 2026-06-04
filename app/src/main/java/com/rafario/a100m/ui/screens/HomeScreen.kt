@@ -272,7 +272,7 @@ private fun MontaditoOrderLine(
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = "${formatMontaditoId(linea.productoId)}. ${linea.nombre}",
+                text = "${linea.productoId}. ${linea.nombre}",
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -304,11 +304,6 @@ private fun EmptyOrdersContent() {
 
 private fun formatPrice(price: Double): String {
     return String.format(Locale.forLanguageTag("es-ES"), "%.2f €", price)
-}
-
-private fun formatMontaditoId(id: Int): String {
-    val normalizedId = if (id in 1001..1100) id - 1000 else id
-    return "%03d".format(normalizedId)
 }
 
 private fun sharePedidoByWhatsApp(
@@ -346,7 +341,7 @@ private fun Pedido.toShareText(): String {
         val montaditoIds = lineas
             .filter { it.tipoProducto == TipoProducto.MONTADITO }
             .flatMap { line ->
-                List(line.cantidad) { formatMontaditoId(line.productoId) }
+                List(line.cantidad) { line.productoId }
             }
 
         if (montaditoIds.isNotEmpty()) {
