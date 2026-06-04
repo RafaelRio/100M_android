@@ -50,6 +50,11 @@ fun AppNavGraph() {
         composable(AppRoute.HOME) {
             HomeScreen(
                 pedidos = pedidos,
+                onDeleteOrderClick = { pedidoId ->
+                    coroutineScope.launch {
+                        pedidoRepository.deletePedido(pedidoId)
+                    }
+                },
                 onCreateOrderClick = {
                     navController.navigate(AppRoute.CREATE_ORDER)
                 }
@@ -61,9 +66,9 @@ fun AppNavGraph() {
                 onBackClick = {
                     navController.popBackStack()
                 },
-                onOrderCreated = { lineas ->
+                onOrderCreated = { nombre, lineas ->
                     coroutineScope.launch {
-                        pedidoRepository.addPedido(lineas)
+                        pedidoRepository.addPedido(nombre, lineas)
                         navController.popBackStack()
                     }
                 }

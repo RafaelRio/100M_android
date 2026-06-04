@@ -24,17 +24,28 @@ class PedidoRepository(
         preferences[pedidosKey]?.toPedidos().orEmpty()
     }
 
-    suspend fun addPedido(lineas: List<LineaPedido>) {
+    suspend fun addPedido(
+        nombre: String,
+        lineas: List<LineaPedido>
+    ) {
         val currentPedidos = pedidos.first()
         val nextId = (currentPedidos.maxOfOrNull { it.id } ?: 0) + 1
         val newPedido = Pedido(
             id = nextId,
-            nombre = "",
+            nombre = nombre,
             lineas = lineas
         )
 
         context.pedidosDataStore.edit { preferences ->
             preferences[pedidosKey] = (currentPedidos + newPedido).toJson()
+        }
+    }
+
+    suspend fun deletePedido(pedidoId: Int) {
+        val updatedPedidos = pedidos.first().filterNot { it.id == pedidoId }
+
+        context.pedidosDataStore.edit { preferences ->
+            preferences[pedidosKey] = updatedPedidos.toJson()
         }
     }
 }
