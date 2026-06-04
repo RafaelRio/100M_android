@@ -66,17 +66,14 @@ fun CreateOrderScreen(
         tipoProducto: TipoProducto = TipoProducto.OTRO
     ) {
         val currentLine = cartLines[id]
-        cartLines[id] = if (currentLine == null) {
-            LineaPedido(
+        cartLines[id] = currentLine?.copy(cantidad = currentLine.cantidad + 1)
+            ?: LineaPedido(
                 productoId = id,
                 nombre = name,
                 precioUnitario = price,
                 cantidad = 1,
                 tipoProducto = tipoProducto
             )
-        } else {
-            currentLine.copy(cantidad = currentLine.cantidad + 1)
-        }
     }
 
     Scaffold(
@@ -123,7 +120,7 @@ fun CreateOrderScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            item {
+            item(key = "header") {
                 Text(
                     text = "Elige productos",
                     style = MaterialTheme.typography.headlineSmall,
@@ -139,7 +136,7 @@ fun CreateOrderScreen(
             }
 
             if (cartLines.isNotEmpty()) {
-                item {
+                item(key = "cart_summary") {
                     CartSummary(
                         productCount = cartProductCount,
                         total = cartTotal
@@ -147,7 +144,7 @@ fun CreateOrderScreen(
                 }
             }
 
-            item {
+            item(key = "section_montaditos") {
                 ProductSection(
                     title = "Montaditos"
                 ) {
@@ -155,7 +152,7 @@ fun CreateOrderScreen(
                         val price = montadito.precioPara(today)
                         ProductRow(
                             quantity = cartLines[montadito.id]?.cantidad ?: 0,
-                            name = montadito.nombre,
+                            name = "${montadito.id}. ${montadito.nombre}",
                             currentPrice = price,
                             onClick = {
                                 addProductToCart(
@@ -171,7 +168,7 @@ fun CreateOrderScreen(
                 }
             }
 
-            item {
+            item(key = "section_bebidas") {
                 ProductSection(
                     title = "Bebidas"
                 ) {
@@ -194,7 +191,7 @@ fun CreateOrderScreen(
                 }
             }
 
-            item {
+            item(key = "section_raciones") {
                 ProductSection(
                     title = "Raciones"
                 ) {
@@ -217,7 +214,7 @@ fun CreateOrderScreen(
                 }
             }
 
-            item {
+            item(key = "section_aperitivos") {
                 ProductSection(
                     title = "Aperitivos"
                 ) {
@@ -240,7 +237,7 @@ fun CreateOrderScreen(
                 }
             }
 
-            item {
+            item(key = "section_ensaladas") {
                 ProductSection(
                     title = "Ensaladas"
                 ) {
@@ -263,7 +260,7 @@ fun CreateOrderScreen(
                 }
             }
 
-            item {
+            item(key = "section_monty_ahorros") {
                 ProductSection(
                     title = "Monty ahorros"
                 ) {
@@ -456,3 +453,4 @@ private fun SectionDivider(
 private fun formatPrice(price: Double): String {
     return String.format(Locale.forLanguageTag("es-ES"), "%.2f €", price)
 }
+

@@ -14,15 +14,16 @@ object CatalogoDataSource {
 
     val montaditos = listOf(
         Montadito(
-            id = 1001,
+            id = 1,
             nombre = "Jamón gran reserva con aceite de oliva",
             precio = 1.50,
             preciosEspeciales = listOf(
-                PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00)
+                PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
+                PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
         Montadito(
-            id = 1002,
+            id = 2,
             nombre = "Tortilla de patatas con alioli",
             precio = 1.50,
             preciosEspeciales = listOf(
@@ -30,32 +31,32 @@ object CatalogoDataSource {
             )
         ),
         Montadito(
-            id = 1003,
+            id = 3,
             nombre = "Pollo kebab con salsa brava",
             precio = 2.00
         ),
         Montadito(
-            id = 1004,
+            id = 4,
             nombre = "Lomo al ajillo con queso",
             precio = 2.00
         ),
         Montadito(
-            id = 1005,
+            id = 5,
             nombre = "Salmón ahumado con crema de queso",
             precio = 2.50
         ),
         Montadito(
-            id = 1006,
+            id = 6,
             nombre = "Carrillera con salsa de la casa",
             precio = 2.50
         ),
         Montadito(
-            id = 1007,
+            id = 7,
             nombre = "Pulled pork con cheddar",
             precio = 2.50
         ),
         Montadito(
-            id = 1008,
+            id = 8,
             nombre = "Queso de cabra con cebolla caramelizada",
             precio = 2.00
         )

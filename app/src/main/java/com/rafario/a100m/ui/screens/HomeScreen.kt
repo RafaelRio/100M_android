@@ -111,12 +111,12 @@ private fun OrderCard(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
-                        text = "Pedido #${pedido.id}",
+                        text = pedido.nombre.ifBlank { "Sin nombre" },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = pedido.nombre.ifBlank { "Sin nombre" },
+                        text = "Pedido #${pedido.id}",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -128,12 +128,6 @@ private fun OrderCard(
                     color = MaterialTheme.colorScheme.primary
                 )
             }
-
-            Text(
-                text = "${pedido.cantidadProductos} productos",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
 
             pedido.lineas.forEach { linea ->
                 OrderLine(linea = linea)
@@ -161,29 +155,10 @@ private fun OrderLine(
 private fun MontaditoOrderLine(
     linea: LineaPedido
 ) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f),
-        shape = MaterialTheme.shapes.small
-    ) {
         Row(
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "Montadito",
-                modifier = Modifier
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.45f),
-                        shape = MaterialTheme.shapes.small
-                    )
-                    .padding(horizontal = 6.dp, vertical = 2.dp),
-                style = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
-            )
             Text(
                 text = "${linea.cantidad}x",
                 style = MaterialTheme.typography.bodySmall,
@@ -191,13 +166,13 @@ private fun MontaditoOrderLine(
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = linea.nombre,
+                text = "${linea.productoId}. ${linea.nombre}",
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
-    }
+
 }
 
 @Composable
@@ -224,3 +199,4 @@ private fun EmptyOrdersContent() {
 private fun formatPrice(price: Double): String {
     return String.format(Locale.forLanguageTag("es-ES"), "%.2f €", price)
 }
+
