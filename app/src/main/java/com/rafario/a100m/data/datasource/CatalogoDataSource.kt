@@ -916,51 +916,337 @@ object CatalogoDataSource {
     )
 
     val bebidas = listOf(
+        //region CERVEZAS EN JARRA Y PREMIUM
         Bebida(
             id = 2001,
-            nombre = "Jarra de cerveza",
-            tamano = "500 ml",
-            tipoBebida = TipoBebida.CERVEZA,
-            precio = 1.80
-        ),
-        Bebida(
-            id = 2002,
-            nombre = "Caña",
+            nombre = "Jarra Quijote de Cruzcampo Especial",
             tamano = "250 ml",
             tipoBebida = TipoBebida.CERVEZA,
-            precio = 1.20,
-            preciosEspeciales = listOf(
-                PrecioEspecial(DayOfWeek.THURSDAY, 1.00)
-            )
-        ),
-        Bebida(
-            id = 2003,
-            nombre = "Jarra de tinto de verano",
-            tamano = "500 ml",
-            tipoBebida = TipoBebida.TINTO_DE_VERANO,
-            precio = 1.80
-        ),
-        Bebida(
-            id = 2004,
-            nombre = "Agua mineral",
-            tamano = "500 ml",
-            tipoBebida = TipoBebida.CLASICAS,
             precio = 1.50
         ),
         Bebida(
+            id = 2001,
+            nombre = "Jarra Quijote de Ladrón de Verano",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.TINTO_DE_VERANO,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2003,
+            nombre = "Jarra Sancho de Cruzcampo Especial",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2004,
+            nombre = "Jarra Sancho de Ladrón de Verano",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TINTO_DE_VERANO,
+            precio = 2.50
+        ),
+        Bebida(
             id = 2005,
-            nombre = "Refresco de cola",
-            tamano = "330 ml",
-            tipoBebida = TipoBebida.CLASICAS,
-            precio = 1.90
+            nombre = "Jarra Quijote de Cruzcampo Radler",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 1.50
         ),
         Bebida(
             id = 2006,
-            nombre = "Café solo",
-            tamano = "Taza",
+            nombre = "Jarra Quijote de Ladrón de Manzana",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2007,
+            nombre = "Jarra Quijote de Heineken",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2008,
+            nombre = "Jarra Quijote de El Águila Dorada",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2009,
+            nombre = "Jarra Sancho de Cruzcampo Radler",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2010,
+            nombre = "Jarra Sancho de Ladrón de Manzanas",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2011,
+            nombre = "Jarra Sancho de Heineken",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2012,
+            nombre = "Jarra Sancho de El Águila Dorada",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA_PREMIUM,
+            precio = 2.50
+        ),
+        //endregion
+
+        //region CERVEZAS EN BOTELLA
+        Bebida(
+            id = 2013,
+            nombre = "Cruzcampo sin gluten (tercio)",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.CERVEZA_BOTELLA,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2014,
+            nombre = "Heineken 0,0 (tercio)",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.CERVEZA_BOTELLA,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2015,
+            nombre = "Desperados (tercio)",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA_BOTELLA,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2016,
+            nombre = "Paulaner (media)",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CERVEZA_BOTELLA,
+            precio = 2.50
+        ),
+        //endregion
+
+        //region TARDEO PREMIUM
+        Bebida(
+            id = 2017,
+            nombre = "Ron Havana Club Origen",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2018,
+            nombre = "Ginebra Beefeater",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2019,
+            nombre = "Beefeater 0,0",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2020,
+            nombre = "Whisky Ballantine´s",
+            tamano = "250 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2021,
+            nombre = "Vodka Absolut",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2022,
+            nombre = "Petroni Spritz",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2023,
+            nombre = "Crema Ruavieja",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TARDEO_PREMIUM,
+            precio = 2.50
+        ),
+        //endregion
+
+        //region TARDEO CHILL
+        Bebida(
+            id = 2024,
+            nombre = "Absolut & Sprite",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TARDEO_CHILL,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2025,
+            nombre = "Bacardi & Coke",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TARDEO_CHILL,
+            precio = 2.50
+        ),
+        Bebida(
+            id = 2026,
+            nombre = "Jack & Coke",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.TARDEO_CHILL,
+            precio = 2.50
+        ),
+        //endregion
+
+        //region CLASICAS
+        Bebida(
+            id = 2027,
+            nombre = "Coca-Cola",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2028,
+            nombre = "Coca-Cola Zero",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2029,
+            nombre = "Fanta",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2027,
+            nombre = "Sprite",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2028,
+            nombre = "Fuze Tea",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2029,
+            nombre = "Aquarius",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2030,
+            nombre = "Appletiser",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.CLASICAS,
+            precio = 2.00
+        ),
+        //endregion
+
+        //region ENERGETICAS
+        Bebida(
+            id = 2031,
+            nombre = "Monster Green",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.ENERGETICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2032,
+            nombre = "Monster Mango Loco",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.ENERGETICAS,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2033,
+            nombre = "Monster Ultra White",
+            tamano = "500 ml",
+            tipoBebida = TipoBebida.ENERGETICAS,
+            precio = 2.00
+        ),
+        //endregion
+
+        //region VINO
+        Bebida(
+            id = 2034,
+            nombre = "Buenos Días Ribera de Duero",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.VINO,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2035,
+            nombre = "Cune rosado Navarra",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.VINO,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2036,
+            nombre = "Cune blanco Verdejo",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.VINO,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2037,
+            nombre = "Cune tinto Crianza Rioja",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.VINO,
+            precio = 2.00
+        ),
+        //endregion
+
+        //region CAFE E INFUSIONES
+
+        Bebida(
+            id = 2038,
+            nombre = "Café natural",
+            tamano = "10,70 cl",
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
-            precio = 1.20
-        )
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2039,
+            nombre = "Infusiones",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.CAFE_INFUSIONES,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2040,
+            nombre = "Batidos",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.CAFE_INFUSIONES,
+            precio = 2.00
+        ),
+        Bebida(
+            id = 2041,
+            nombre = "Zumo",
+            tamano = "10,70 cl",
+            tipoBebida = TipoBebida.CAFE_INFUSIONES,
+            precio = 2.00
+        ),
     )
 
     val raciones = listOf(
