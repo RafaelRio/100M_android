@@ -1007,28 +1007,28 @@ object CatalogoDataSource {
         Bebida(
             id = 2013,
             nombre = "Cruzcampo sin gluten (tercio)",
-            tamano = "250 ml",
+            tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
             precio = 1.50
         ),
         Bebida(
             id = 2014,
             nombre = "Heineken 0,0 (tercio)",
-            tamano = "250 ml",
+            tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
             precio = 1.50
         ),
         Bebida(
             id = 2015,
             nombre = "Desperados (tercio)",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
             precio = 2.50
         ),
         Bebida(
             id = 2016,
             nombre = "Paulaner (media)",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
             precio = 2.50
         ),
@@ -1038,49 +1038,49 @@ object CatalogoDataSource {
         Bebida(
             id = 2017,
             nombre = "Ron Havana Club Origen",
-            tamano = "250 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 1.50
         ),
         Bebida(
             id = 2018,
             nombre = "Ginebra Beefeater",
-            tamano = "250 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 1.50
         ),
         Bebida(
             id = 2019,
             nombre = "Beefeater 0,0",
-            tamano = "250 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 1.50
         ),
         Bebida(
             id = 2020,
             nombre = "Whisky Ballantine´s",
-            tamano = "250 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 1.50
         ),
         Bebida(
             id = 2021,
             nombre = "Vodka Absolut",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 2.50
         ),
         Bebida(
             id = 2022,
             nombre = "Petroni Spritz",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 2.50
         ),
         Bebida(
             id = 2023,
             nombre = "Crema Ruavieja",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
             precio = 2.50
         ),
@@ -1090,21 +1090,21 @@ object CatalogoDataSource {
         Bebida(
             id = 2024,
             nombre = "Absolut & Sprite",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_CHILL,
             precio = 2.50
         ),
         Bebida(
             id = 2025,
             nombre = "Bacardi & Coke",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_CHILL,
             precio = 2.50
         ),
         Bebida(
             id = 2026,
             nombre = "Jack & Coke",
-            tamano = "500 ml",
+            tamano = null,
             tipoBebida = TipoBebida.TARDEO_CHILL,
             precio = 2.50
         ),
@@ -1156,7 +1156,7 @@ object CatalogoDataSource {
         Bebida(
             id = 2030,
             nombre = "Appletiser",
-            tamano = "500 ml",
+            tamano = "275 ml",
             tipoBebida = TipoBebida.CLASICAS,
             precio = 2.00
         ),
@@ -1218,35 +1218,35 @@ object CatalogoDataSource {
         //endregion
 
         //region CAFE E INFUSIONES
-
         Bebida(
             id = 2038,
             nombre = "Café natural",
-            tamano = "10,70 cl",
+            tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
         Bebida(
             id = 2039,
             nombre = "Infusiones",
-            tamano = "10,70 cl",
+            tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
         Bebida(
             id = 2040,
             nombre = "Batidos",
-            tamano = "10,70 cl",
+            tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
         Bebida(
             id = 2041,
             nombre = "Zumo",
-            tamano = "10,70 cl",
+            tamano = "20 cl",
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
+        //endregion
     )
 
     val raciones = listOf(

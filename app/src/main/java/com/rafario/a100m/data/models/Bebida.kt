@@ -1,14 +1,16 @@
 package com.rafario.a100m.data.models
 
+import java.time.DayOfWeek
+
 data class Bebida(
     val id: Int,
     val nombre: String,
-    val tamano: String,
+    val tamano: String?,
     val tipoBebida: TipoBebida,
     val precio: Double,
     val preciosEspeciales: List<PrecioEspecial> = emptyList()
 ) {
-    fun precioPara(dia: java.time.DayOfWeek): Double {
+    fun precioPara(dia: DayOfWeek): Double {
         return precioParaDia(precio, preciosEspeciales, dia)
     }
 }
