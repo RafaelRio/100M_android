@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rafario.a100m.data.datasource.CatalogoDataSource
 import com.rafario.a100m.data.models.LineaPedido
+import com.rafario.a100m.data.models.TipoProducto
 import java.time.LocalDate
 import java.util.Locale
 
@@ -61,7 +62,8 @@ fun CreateOrderScreen(
     fun addProductToCart(
         id: Int,
         name: String,
-        price: Double
+        price: Double,
+        tipoProducto: TipoProducto = TipoProducto.OTRO
     ) {
         val currentLine = cartLines[id]
         cartLines[id] = if (currentLine == null) {
@@ -69,7 +71,8 @@ fun CreateOrderScreen(
                 productoId = id,
                 nombre = name,
                 precioUnitario = price,
-                cantidad = 1
+                cantidad = 1,
+                tipoProducto = tipoProducto
             )
         } else {
             currentLine.copy(cantidad = currentLine.cantidad + 1)
@@ -158,7 +161,8 @@ fun CreateOrderScreen(
                                 addProductToCart(
                                     id = montadito.id,
                                     name = montadito.nombre,
-                                    price = price
+                                    price = price,
+                                    tipoProducto = TipoProducto.MONTADITO
                                 )
                             }
                         )

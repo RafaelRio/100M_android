@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -23,7 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.rafario.a100m.data.models.LineaPedido
 import com.rafario.a100m.data.models.Pedido
+import com.rafario.a100m.data.models.TipoProducto
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -133,12 +136,66 @@ private fun OrderCard(
             )
 
             pedido.lineas.forEach { linea ->
-                Text(
-                    text = "${linea.cantidad}x ${linea.nombre}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                OrderLine(linea = linea)
             }
+        }
+    }
+}
+
+@Composable
+private fun OrderLine(
+    linea: LineaPedido
+) {
+    if (linea.tipoProducto == TipoProducto.MONTADITO) {
+        MontaditoOrderLine(linea = linea)
+    } else {
+        Text(
+            text = "${linea.cantidad}x ${linea.nombre}",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
+}
+
+@Composable
+private fun MontaditoOrderLine(
+    linea: LineaPedido
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f),
+        shape = MaterialTheme.shapes.small
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Montadito",
+                modifier = Modifier
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.45f),
+                        shape = MaterialTheme.shapes.small
+                    )
+                    .padding(horizontal = 6.dp, vertical = 2.dp),
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = "${linea.cantidad}x",
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            Text(
+                text = linea.nombre,
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
         }
     }
 }

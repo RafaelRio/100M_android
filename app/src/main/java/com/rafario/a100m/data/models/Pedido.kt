@@ -17,8 +17,14 @@ data class LineaPedido(
     val nombre: String,
     val precioUnitario: Double,
     val cantidad: Int,
+    val tipoProducto: TipoProducto = TipoProducto.OTRO,
     val observaciones: String? = null
 ) {
     val subtotal: Double
         get() = precioUnitario * cantidad
+}
+
+enum class TipoProducto {
+    MONTADITO,
+    OTRO
 }
