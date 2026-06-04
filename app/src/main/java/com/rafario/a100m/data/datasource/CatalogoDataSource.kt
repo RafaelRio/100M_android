@@ -5,8 +5,10 @@ import com.rafario.a100m.data.models.Bebida
 import com.rafario.a100m.data.models.Ensalada
 import com.rafario.a100m.data.models.Montadito
 import com.rafario.a100m.data.models.MontyAhorro
+import com.rafario.a100m.data.models.PrecioEspecial
 import com.rafario.a100m.data.models.Racion
 import com.rafario.a100m.data.models.TipoBebida
+import java.time.DayOfWeek
 
 object CatalogoDataSource {
 
@@ -14,12 +16,18 @@ object CatalogoDataSource {
         Montadito(
             id = 1001,
             nombre = "Jamón gran reserva con aceite de oliva",
-            precio = 1.50
+            precio = 1.50,
+            preciosEspeciales = listOf(
+                PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00)
+            )
         ),
         Montadito(
             id = 1002,
             nombre = "Tortilla de patatas con alioli",
-            precio = 1.50
+            precio = 1.50,
+            preciosEspeciales = listOf(
+                PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00)
+            )
         ),
         Montadito(
             id = 1003,
@@ -66,7 +74,10 @@ object CatalogoDataSource {
             nombre = "Caña",
             tamano = "250 ml",
             tipoBebida = TipoBebida.CERVEZA,
-            precio = 1.20
+            precio = 1.20,
+            preciosEspeciales = listOf(
+                PrecioEspecial(DayOfWeek.THURSDAY, 1.00)
+            )
         ),
         Bebida(
             id = 2003,
@@ -165,7 +176,10 @@ object CatalogoDataSource {
             id = 6001,
             nombre = "Monty ahorro clásico",
             montaditos = listOf(montaditos[0], montaditos[1], montaditos[3]),
-            precio = 4.00
+            precio = 4.00,
+            preciosEspeciales = listOf(
+                PrecioEspecial(DayOfWeek.MONDAY, 3.50)
+            )
         ),
         MontyAhorro(
             id = 6002,

@@ -1,6 +1,8 @@
 package com.rafario.a100m.data.models
 
 data class Pedido(
+    val id: Int = 0,
+    val nombre: String = "",
     val lineas: List<LineaPedido> = emptyList()
 ) {
     val total: Double

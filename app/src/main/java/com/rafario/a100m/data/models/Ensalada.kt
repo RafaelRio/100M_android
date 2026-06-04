@@ -3,5 +3,10 @@ package com.rafario.a100m.data.models
 data class Ensalada(
     val id: Int,
     val nombre: String,
-    val precio: Double
-)
+    val precio: Double,
+    val preciosEspeciales: List<PrecioEspecial> = emptyList()
+) {
+    fun precioPara(dia: java.time.DayOfWeek): Double {
+        return precioParaDia(precio, preciosEspeciales, dia)
+    }
+}

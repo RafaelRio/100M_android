@@ -4,5 +4,10 @@ data class MontyAhorro(
     val id: Int,
     val nombre: String,
     val montaditos: List<Montadito>,
-    val precio: Double
-)
+    val precio: Double,
+    val preciosEspeciales: List<PrecioEspecial> = emptyList()
+) {
+    fun precioPara(dia: java.time.DayOfWeek): Double {
+        return precioParaDia(precio, preciosEspeciales, dia)
+    }
+}

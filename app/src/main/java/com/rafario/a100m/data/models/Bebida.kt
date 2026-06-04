@@ -5,8 +5,13 @@ data class Bebida(
     val nombre: String,
     val tamano: String,
     val tipoBebida: TipoBebida,
-    val precio: Double
-)
+    val precio: Double,
+    val preciosEspeciales: List<PrecioEspecial> = emptyList()
+) {
+    fun precioPara(dia: java.time.DayOfWeek): Double {
+        return precioParaDia(precio, preciosEspeciales, dia)
+    }
+}
 
 enum class TipoBebida(val tipo: String) {
     CERVEZA("Cerveza"),
