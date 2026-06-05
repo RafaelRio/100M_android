@@ -317,6 +317,9 @@ fun CreateOrderScreen(
                         ProductRow(
                             quantity = cartLines[montyAhorro.id]?.cantidad ?: 0,
                             name = montyAhorro.nombre,
+                            supportingItems = montyAhorro.montaditos.map {
+                                "${formatMontaditoId(it.id)}. ${it.nombre}"
+                            },
                             currentPrice = price,
                             onClick = {
                                 addProductToCart(
@@ -486,6 +489,7 @@ private fun ProductSection(
 private fun ProductRow(
     quantity: Int,
     name: String,
+    supportingItems: List<String> = emptyList(),
     currentPrice: Double,
     onClick: () -> Unit
 ) {
@@ -495,7 +499,7 @@ private fun ProductRow(
             .clickable(onClick = onClick)
             .padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Top
     ) {
         if (quantity > 0) {
             Surface(
@@ -521,7 +525,20 @@ private fun ProductRow(
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurface
             )
-
+            if (supportingItems.isNotEmpty()) {
+                Column(
+                    modifier = Modifier.padding(top = 4.dp),
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    supportingItems.forEach { item ->
+                        Text(
+                            text = "• $item",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
         }
 
         Column {
