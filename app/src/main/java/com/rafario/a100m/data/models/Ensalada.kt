@@ -3,6 +3,7 @@ package com.rafario.a100m.data.models
 data class Ensalada(
     val id: Int,
     val nombre: String,
+    val ingredientes: String,
     val precio: Double,
     val preciosEspeciales: List<PrecioEspecial> = emptyList()
 ) {

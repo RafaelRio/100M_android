@@ -1365,26 +1365,23 @@ object CatalogoDataSource {
     val ensaladas = listOf(
         Ensalada(
             id = 5001,
-            nombre = "Ensalada César",
+            nombre = "Ensalada Campera",
+            ingredientes = "Lechuga, pollo, tomate, queso madurado, aceitunas, picatostes y salsa alioli",
             precio = 6.50
         ),
         Ensalada(
             id = 5002,
-            nombre = "Ensalada de queso de cabra",
+            nombre = "Ensalada Texmex",
+            ingredientes = "Lechuga, pollo kebab, tomate, maíz, aceitunas, nachos sabor TexMex y salsa mostaza y miel",
             precio = 6.90
-        ),
-        Ensalada(
-            id = 5003,
-            nombre = "Ensalada mediterránea",
-            precio = 5.90
         )
     )
 
     val montyAhorros = listOf(
         MontyAhorro(
             id = 6001,
-            nombre = "Monty ahorro clásico",
-            montaditos = listOf(montaditos[0], montaditos[1], montaditos[3]),
+            nombre = "MontyCookie",
+            montaditos = listOf(montaditos[67], montaditos[68], montaditos[69]),
             precio = 4.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.MONDAY, 3.50)
@@ -1392,14 +1389,50 @@ object CatalogoDataSource {
         ),
         MontyAhorro(
             id = 6002,
-            nombre = "Monty ahorro especial",
-            montaditos = listOf(montaditos[2], montaditos[5], montaditos[6]),
+            nombre = "MontyDinas",
+            montaditos = listOf(
+                montaditos[70],
+                montaditos[71],
+                montaditos[72],
+                montaditos[73],
+                montaditos[74]
+            ),
             precio = 6.50
         ),
         MontyAhorro(
             id = 6003,
-            nombre = "Monty ahorro veggie",
-            montaditos = listOf(montaditos[1], montaditos[7], montaditos[4]),
+            nombre = "MontyPerros",
+            montaditos = listOf(
+                montaditos[75],
+                montaditos[76],
+                montaditos[77],
+                montaditos[78],
+                montaditos[79]
+            ),
+            precio = 5.50
+        ),
+        MontyAhorro(
+            id = 6004,
+            nombre = "MontyBurgers",
+            montaditos = listOf(
+                montaditos[80],
+                montaditos[81],
+                montaditos[82],
+                montaditos[83],
+                montaditos[84]
+            ),
+            precio = 6.50
+        ),
+        MontyAhorro(
+            id = 6005,
+            nombre = "MontyPizzas",
+            montaditos = listOf(
+                montaditos[85],
+                montaditos[86],
+                montaditos[87],
+                montaditos[88],
+                montaditos[89]
+            ),
             precio = 5.50
         )
     )
