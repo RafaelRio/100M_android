@@ -84,7 +84,8 @@ fun CreateOrderScreen(
         id: Int,
         name: String,
         price: Double,
-        tipoProducto: TipoProducto = TipoProducto.OTRO
+        tipoProducto: TipoProducto = TipoProducto.OTRO,
+        observaciones: String? = null
     ) {
         val currentLine = cartLines[id]
         cartLines[id] = currentLine?.copy(cantidad = currentLine.cantidad + 1)
@@ -93,7 +94,8 @@ fun CreateOrderScreen(
                 nombre = name,
                 precioUnitario = price,
                 cantidad = 1,
-                tipoProducto = tipoProducto
+                tipoProducto = tipoProducto,
+                observaciones = observaciones
             )
     }
 
@@ -314,12 +316,14 @@ fun CreateOrderScreen(
                     ProductRow(
                         quantity = cartLines[aperitivo.id]?.cantidad ?: 0,
                         name = aperitivo.nombre,
+                        supportingText = aperitivo.descripcion,
                         currentPrice = price,
                         onClick = {
                             addProductToCart(
                                 id = aperitivo.id,
                                 name = aperitivo.nombre,
-                                price = price
+                                price = price,
+                                observaciones = aperitivo.descripcion
                             )
                         }
                     )
@@ -344,6 +348,7 @@ fun CreateOrderScreen(
                     ProductRow(
                         quantity = cartLines[ensalada.id]?.cantidad ?: 0,
                         name = ensalada.nombre,
+                        supportingText = ensalada.ingredientes,
                         currentPrice = price,
                         onClick = {
                             addProductToCart(
@@ -533,6 +538,7 @@ private fun ProductSectionHeader(
 private fun ProductRow(
     quantity: Int,
     name: String,
+    supportingText: String? = null,
     supportingItems: List<String> = emptyList(),
     currentPrice: Double,
     onClick: () -> Unit
@@ -569,6 +575,14 @@ private fun ProductRow(
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurface
             )
+            if (!supportingText.isNullOrBlank()) {
+                Text(
+                    text = supportingText,
+                    modifier = Modifier.padding(top = 2.dp),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
             if (supportingItems.isNotEmpty()) {
                 Column(
                     modifier = Modifier.padding(top = 4.dp),

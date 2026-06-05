@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.rafario.a100m.data.datasource.CatalogoDataSource
 import com.rafario.a100m.data.models.LineaPedido
 import com.rafario.a100m.data.models.Pedido
 import com.rafario.a100m.data.models.TipoProducto
@@ -249,11 +250,21 @@ private fun OrderLine(
     if (linea.tipoProducto == TipoProducto.MONTADITO) {
         MontaditoOrderLine(linea = linea)
     } else {
-        Text(
-            text = "${linea.cantidad}x ${linea.nombre}",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        Column {
+            Text(
+                text = "${linea.cantidad}x ${linea.nombre}",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            linea.descripcionAperitivo()?.let { descripcion ->
+                Text(
+                    text = descripcion,
+                    modifier = Modifier.padding(start = 16.dp, top = 2.dp),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
     }
 }
 
@@ -352,9 +363,17 @@ private fun Pedido.toShareText(): String {
             .filterNot { it.tipoProducto == TipoProducto.MONTADITO }
             .forEach { linea ->
                 appendLine("${linea.cantidad}x ${linea.nombre}")
+                linea.descripcionAperitivo()?.let { descripcion ->
+                    appendLine("  $descripcion")
+                }
             }
 
         appendLine()
         append("Total: ${formatPrice(total)}")
     }
+}
+
+private fun LineaPedido.descripcionAperitivo(): String? {
+    return observaciones
+        ?: CatalogoDataSource.aperitivos.firstOrNull { it.id == productoId }?.descripcion
 }
