@@ -1,11 +1,9 @@
 package com.rafario.a100m.ui.screens
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -65,6 +64,17 @@ fun CreateOrderScreen(
     val cartLines = remember { mutableStateMapOf<Int, LineaPedido>() }
     var orderName by rememberSaveable { mutableStateOf("") }
     var showConfirmationDialog by rememberSaveable { mutableStateOf(false) }
+    var montaditosExpanded by rememberSaveable { mutableStateOf(false) }
+    var bebidasExpanded by rememberSaveable { mutableStateOf(false) }
+    var racionesExpanded by rememberSaveable { mutableStateOf(false) }
+    var aperitivosExpanded by rememberSaveable { mutableStateOf(false) }
+    var ensaladasExpanded by rememberSaveable { mutableStateOf(false) }
+    var montyAhorrosExpanded by rememberSaveable { mutableStateOf(false) }
+    val bebidasByType = remember {
+        CatalogoDataSource.bebidas
+            .groupBy { it.tipoBebida }
+            .toList()
+    }
     val cartTotal = cartLines.values.sumOf { it.subtotal }
     val cartProductCount = cartLines.values.sumOf { it.cantidad }
     val trimmedOrderName = orderName.trim()
@@ -144,7 +154,7 @@ fun CreateOrderScreen(
                 .fillMaxSize()
                 .padding(innerPadding),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(0.dp)
         ) {
             item(key = "header") {
                 Text(
@@ -165,7 +175,9 @@ fun CreateOrderScreen(
                 OutlinedTextField(
                     value = orderName,
                     onValueChange = { orderName = it },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 12.dp),
                     shape = MaterialTheme.shapes.large,
                     label = {
                         Text(text = "Nombre del pedido")
@@ -188,150 +200,193 @@ fun CreateOrderScreen(
             }
 
             item(key = "section_montaditos") {
-                ProductSection(
-                    title = "Montaditos"
-                ) {
-                    CatalogoDataSource.montaditos.forEachIndexed { index, montadito ->
-                        val price = montadito.precioPara(today)
-                        ProductRow(
-                            quantity = cartLines[montadito.id]?.cantidad ?: 0,
-                            name = "${formatMontaditoId(montadito.id)}. ${montadito.nombre}",
-                            currentPrice = price,
-                            onClick = {
-                                addProductToCart(
-                                    id = montadito.id,
-                                    name = montadito.nombre,
-                                    price = price,
-                                    tipoProducto = TipoProducto.MONTADITO
-                                )
-                            }
-                        )
-                        SectionDivider(index, CatalogoDataSource.montaditos.lastIndex)
-                    }
+                ProductSectionHeader(
+                    title = "Montaditos",
+                    expanded = montaditosExpanded,
+                    onToggle = { montaditosExpanded = !montaditosExpanded }
+                )
+            }
+
+            if (montaditosExpanded) {
+                itemsIndexed(
+                    items = CatalogoDataSource.montaditos,
+                    key = { _, montadito -> "montadito_${montadito.id}" }
+                ) { index, montadito ->
+                    val price = montadito.precioPara(today)
+                    ProductRow(
+                        quantity = cartLines[montadito.id]?.cantidad ?: 0,
+                        name = "${formatMontaditoId(montadito.id)}. ${montadito.nombre}",
+                        currentPrice = price,
+                        onClick = {
+                            addProductToCart(
+                                id = montadito.id,
+                                name = montadito.nombre,
+                                price = price,
+                                tipoProducto = TipoProducto.MONTADITO
+                            )
+                        }
+                    )
+                    SectionDivider(index, CatalogoDataSource.montaditos.lastIndex)
                 }
             }
 
             item(key = "section_bebidas") {
-                ProductSection(
-                    title = "Bebidas"
-                ) {
-                    CatalogoDataSource.bebidas
-                        .groupBy { it.tipoBebida }
-                        .forEach { (tipoBebida, bebidas) ->
-                            ProductGroupHeader(title = tipoBebida.tipo)
-                            bebidas.forEachIndexed { index, bebida ->
-                                val price = bebida.precioPara(today)
-                                val bebidaName = bebida.nombreConTamano()
-                                ProductRow(
-                                    quantity = cartLines[bebida.id]?.cantidad ?: 0,
+                ProductSectionHeader(
+                    title = "Bebidas",
+                    expanded = bebidasExpanded,
+                    onToggle = { bebidasExpanded = !bebidasExpanded }
+                )
+            }
+
+            if (bebidasExpanded) {
+                bebidasByType.forEach { (tipoBebida, bebidas) ->
+                    item(key = "bebida_group_${tipoBebida.name}") {
+                        ProductGroupHeader(title = tipoBebida.tipo)
+                    }
+
+                    itemsIndexed(
+                        items = bebidas,
+                        key = { _, bebida -> "bebida_${bebida.id}" }
+                    ) { index, bebida ->
+                        val price = bebida.precioPara(today)
+                        val bebidaName = bebida.nombreConTamano()
+                        ProductRow(
+                            quantity = cartLines[bebida.id]?.cantidad ?: 0,
+                            name = bebidaName,
+                            currentPrice = price,
+                            onClick = {
+                                addProductToCart(
+                                    id = bebida.id,
                                     name = bebidaName,
-                                    currentPrice = price,
-                                    onClick = {
-                                        addProductToCart(
-                                            id = bebida.id,
-                                            name = bebidaName,
-                                            price = price
-                                        )
-                                    }
+                                    price = price
                                 )
-                                SectionDivider(index, bebidas.lastIndex)
                             }
-                        }
+                        )
+                        SectionDivider(index, bebidas.lastIndex)
+                    }
                 }
             }
 
             item(key = "section_raciones") {
-                ProductSection(
-                    title = "Raciones"
-                ) {
-                    CatalogoDataSource.raciones.forEachIndexed { index, racion ->
-                        val price = racion.precioPara(today)
-                        ProductRow(
-                            quantity = cartLines[racion.id]?.cantidad ?: 0,
-                            name = racion.nombre,
-                            currentPrice = price,
-                            onClick = {
-                                addProductToCart(
-                                    id = racion.id,
-                                    name = racion.nombre,
-                                    price = price
-                                )
-                            }
-                        )
-                        SectionDivider(index, CatalogoDataSource.raciones.lastIndex)
-                    }
+                ProductSectionHeader(
+                    title = "Raciones",
+                    expanded = racionesExpanded,
+                    onToggle = { racionesExpanded = !racionesExpanded }
+                )
+            }
+
+            if (racionesExpanded) {
+                itemsIndexed(
+                    items = CatalogoDataSource.raciones,
+                    key = { _, racion -> "racion_${racion.id}" }
+                ) { index, racion ->
+                    val price = racion.precioPara(today)
+                    ProductRow(
+                        quantity = cartLines[racion.id]?.cantidad ?: 0,
+                        name = racion.nombre,
+                        currentPrice = price,
+                        onClick = {
+                            addProductToCart(
+                                id = racion.id,
+                                name = racion.nombre,
+                                price = price
+                            )
+                        }
+                    )
+                    SectionDivider(index, CatalogoDataSource.raciones.lastIndex)
                 }
             }
 
             item(key = "section_aperitivos") {
-                ProductSection(
-                    title = "Aperitivos"
-                ) {
-                    CatalogoDataSource.aperitivos.forEachIndexed { index, aperitivo ->
-                        val price = aperitivo.precioPara(today)
-                        ProductRow(
-                            quantity = cartLines[aperitivo.id]?.cantidad ?: 0,
-                            name = aperitivo.nombre,
-                            currentPrice = price,
-                            onClick = {
-                                addProductToCart(
-                                    id = aperitivo.id,
-                                    name = aperitivo.nombre,
-                                    price = price
-                                )
-                            }
-                        )
-                        SectionDivider(index, CatalogoDataSource.aperitivos.lastIndex)
-                    }
+                ProductSectionHeader(
+                    title = "Aperitivos",
+                    expanded = aperitivosExpanded,
+                    onToggle = { aperitivosExpanded = !aperitivosExpanded }
+                )
+            }
+
+            if (aperitivosExpanded) {
+                itemsIndexed(
+                    items = CatalogoDataSource.aperitivos,
+                    key = { _, aperitivo -> "aperitivo_${aperitivo.id}" }
+                ) { index, aperitivo ->
+                    val price = aperitivo.precioPara(today)
+                    ProductRow(
+                        quantity = cartLines[aperitivo.id]?.cantidad ?: 0,
+                        name = aperitivo.nombre,
+                        currentPrice = price,
+                        onClick = {
+                            addProductToCart(
+                                id = aperitivo.id,
+                                name = aperitivo.nombre,
+                                price = price
+                            )
+                        }
+                    )
+                    SectionDivider(index, CatalogoDataSource.aperitivos.lastIndex)
                 }
             }
 
             item(key = "section_ensaladas") {
-                ProductSection(
-                    title = "Ensaladas"
-                ) {
-                    CatalogoDataSource.ensaladas.forEachIndexed { index, ensalada ->
-                        val price = ensalada.precioPara(today)
-                        ProductRow(
-                            quantity = cartLines[ensalada.id]?.cantidad ?: 0,
-                            name = ensalada.nombre,
-                            currentPrice = price,
-                            onClick = {
-                                addProductToCart(
-                                    id = ensalada.id,
-                                    name = ensalada.nombre,
-                                    price = price
-                                )
-                            }
-                        )
-                        SectionDivider(index, CatalogoDataSource.ensaladas.lastIndex)
-                    }
+                ProductSectionHeader(
+                    title = "Ensaladas",
+                    expanded = ensaladasExpanded,
+                    onToggle = { ensaladasExpanded = !ensaladasExpanded }
+                )
+            }
+
+            if (ensaladasExpanded) {
+                itemsIndexed(
+                    items = CatalogoDataSource.ensaladas,
+                    key = { _, ensalada -> "ensalada_${ensalada.id}" }
+                ) { index, ensalada ->
+                    val price = ensalada.precioPara(today)
+                    ProductRow(
+                        quantity = cartLines[ensalada.id]?.cantidad ?: 0,
+                        name = ensalada.nombre,
+                        currentPrice = price,
+                        onClick = {
+                            addProductToCart(
+                                id = ensalada.id,
+                                name = ensalada.nombre,
+                                price = price
+                            )
+                        }
+                    )
+                    SectionDivider(index, CatalogoDataSource.ensaladas.lastIndex)
                 }
             }
 
             item(key = "section_monty_ahorros") {
-                ProductSection(
-                    title = "Monty ahorros"
-                ) {
-                    CatalogoDataSource.montyAhorros.forEachIndexed { index, montyAhorro ->
-                        val price = montyAhorro.precioPara(today)
-                        ProductRow(
-                            quantity = cartLines[montyAhorro.id]?.cantidad ?: 0,
-                            name = montyAhorro.nombre,
-                            supportingItems = montyAhorro.montaditos.map {
-                                "${formatMontaditoId(it.id)}. ${it.nombre}"
-                            },
-                            currentPrice = price,
-                            onClick = {
-                                addProductToCart(
-                                    id = montyAhorro.id,
-                                    name = montyAhorro.nombre,
-                                    price = price
-                                )
-                            }
-                        )
-                        SectionDivider(index, CatalogoDataSource.montyAhorros.lastIndex)
-                    }
+                ProductSectionHeader(
+                    title = "Monty ahorros",
+                    expanded = montyAhorrosExpanded,
+                    onToggle = { montyAhorrosExpanded = !montyAhorrosExpanded }
+                )
+            }
+
+            if (montyAhorrosExpanded) {
+                itemsIndexed(
+                    items = CatalogoDataSource.montyAhorros,
+                    key = { _, montyAhorro -> "monty_ahorro_${montyAhorro.id}" }
+                ) { index, montyAhorro ->
+                    val price = montyAhorro.precioPara(today)
+                    ProductRow(
+                        quantity = cartLines[montyAhorro.id]?.cantidad ?: 0,
+                        name = montyAhorro.nombre,
+                        supportingItems = montyAhorro.montaditos.map {
+                            "${formatMontaditoId(it.id)}. ${it.nombre}"
+                        },
+                        currentPrice = price,
+                        onClick = {
+                            addProductToCart(
+                                id = montyAhorro.id,
+                                name = montyAhorro.nombre,
+                                price = price
+                            )
+                        }
+                    )
+                    SectionDivider(index, CatalogoDataSource.montyAhorros.lastIndex)
                 }
             }
         }
@@ -393,7 +448,9 @@ private fun CartSummary(
     total: Double
 ) {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
         shape = MaterialTheme.shapes.medium
     ) {
@@ -428,17 +485,15 @@ private fun CartSummary(
 }
 
 @Composable
-private fun ProductSection(
+private fun ProductSectionHeader(
     title: String,
-    initiallyExpanded: Boolean = false,
-    content: @Composable ColumnScope.() -> Unit
+    expanded: Boolean,
+    onToggle: () -> Unit
 ) {
-    var expanded by rememberSaveable(title) { mutableStateOf(initiallyExpanded) }
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .animateContentSize()
+            .padding(top = 12.dp)
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outline.copy(alpha = 0.55f),
@@ -452,35 +507,23 @@ private fun ProductSection(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { expanded = !expanded }
+                .clickable(onClick = onToggle)
                 .padding(horizontal = 16.dp, vertical = 14.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
+            Text(
+                text = title,
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
             Icon(
                 imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                 contentDescription = if (expanded) "Contraer $title" else "Desplegar $title",
                 modifier = Modifier.size(28.dp),
                 tint = MaterialTheme.colorScheme.primary
-            )
-        }
-
-        if (expanded) {
-            HorizontalDivider(
-                color = DividerDefaults.color.copy(alpha = 0.55f)
-            )
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
-                content = content
             )
         }
     }
