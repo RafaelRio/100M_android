@@ -49,6 +49,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rafario.a100m.data.datasource.CatalogoDataSource
+import com.rafario.a100m.data.models.Bebida
 import com.rafario.a100m.data.models.LineaPedido
 import com.rafario.a100m.data.models.TipoProducto
 import java.time.LocalDate
@@ -213,21 +214,27 @@ fun CreateOrderScreen(
                 ProductSection(
                     title = "Bebidas"
                 ) {
-                    CatalogoDataSource.bebidas.forEachIndexed { index, bebida ->
-                        val price = bebida.precioPara(today)
-                        ProductRow(
-                            quantity = cartLines[bebida.id]?.cantidad ?: 0,
-                            name = bebida.nombre,
-                            currentPrice = price,
-                            onClick = {
-                                addProductToCart(
-                                    id = bebida.id,
-                                    name = bebida.nombre,
-                                    price = price
+                    CatalogoDataSource.bebidas
+                        .groupBy { it.tipoBebida }
+                        .forEach { (tipoBebida, bebidas) ->
+                            ProductGroupHeader(title = tipoBebida.tipo)
+                            bebidas.forEachIndexed { index, bebida ->
+                                val price = bebida.precioPara(today)
+                                val bebidaName = bebida.nombreConTamano()
+                                ProductRow(
+                                    quantity = cartLines[bebida.id]?.cantidad ?: 0,
+                                    name = bebidaName,
+                                    currentPrice = price,
+                                    onClick = {
+                                        addProductToCart(
+                                            id = bebida.id,
+                                            name = bebidaName,
+                                            price = price
+                                        )
+                                    }
                                 )
+                                SectionDivider(index, bebidas.lastIndex)
                             }
-                        )
-                        SectionDivider(index, CatalogoDataSource.bebidas.lastIndex)
                     }
                 }
             }
@@ -529,6 +536,17 @@ private fun ProductRow(
 }
 
 @Composable
+private fun ProductGroupHeader(title: String) {
+    Text(
+        text = title,
+        modifier = Modifier.padding(top = 12.dp, bottom = 4.dp),
+        style = MaterialTheme.typography.titleSmall,
+        fontWeight = FontWeight.Bold,
+        color = MaterialTheme.colorScheme.primary
+    )
+}
+
+@Composable
 private fun SectionDivider(
     index: Int,
     lastIndex: Int
@@ -542,6 +560,10 @@ private fun SectionDivider(
 
 private fun formatPrice(price: Double): String {
     return String.format(Locale.forLanguageTag("es-ES"), "%.2f €", price)
+}
+
+private fun Bebida.nombreConTamano(): String {
+    return tamano?.takeIf { it.isNotBlank() }?.let { "$nombre ($it)" } ?: nombre
 }
 
 private fun formatMontaditoId(id: Int): String {
