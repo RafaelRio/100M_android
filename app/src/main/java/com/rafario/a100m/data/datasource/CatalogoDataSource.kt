@@ -1252,22 +1252,37 @@ object CatalogoDataSource {
     val raciones = listOf(
         Racion(
             id = 3001,
-            nombre = "Patatas bravas",
+            nombre = "Patatas fritas Bravioli",
             precio = 4.50
         ),
         Racion(
             id = 3002,
-            nombre = "Alitas de pollo BBQ",
+            nombre = "Torreznos",
             precio = 5.50
         ),
         Racion(
             id = 3003,
-            nombre = "Lágrimas de pollo",
+            nombre = "Croquetas de Jamón (13 uds.)",
             precio = 5.00
         ),
         Racion(
             id = 3004,
-            nombre = "Nachos con cheddar y pulled pork",
+            nombre = "Croquetas de Mac&Cheese (10 uds.)",
+            precio = 6.50
+        ),
+        Racion(
+            id = 3005,
+            nombre = "Alitas de pollo BBQ (9 uds.)",
+            precio = 5.00
+        ),
+        Racion(
+            id = 3006,
+            nombre = "Alitas de pollo salsa Brava (9 uds.)",
+            precio = 5.00
+        ),
+        Racion(
+            id = 3007,
+            nombre = "Tiras de pollo",
             precio = 6.50
         )
     )
@@ -1275,22 +1290,76 @@ object CatalogoDataSource {
     val aperitivos = listOf(
         Aperitivo(
             id = 4001,
-            nombre = "Aceitunas aliñadas",
-            descripcion = "Cuenco pequeño para compartir.",
+            nombre = "Aceitunas",
+            descripcion = "- De la abuela.",
             precio = 1.50
         ),
         Aperitivo(
             id = 4002,
-            nombre = "Chips de patata",
+            nombre = "Cucurucho de patatas chips",
             descripcion = null,
             precio = 1.20
         ),
         Aperitivo(
             id = 4003,
-            nombre = "Torreznos crujientes",
-            descripcion = "Aperitivo caliente con salsa suave.",
+            nombre = "Glidas de boquerón",
+            descripcion = null,
             precio = 3.00
-        )
+        ),
+        Aperitivo(
+            id = 4004,
+            nombre = "Glidas de anchoa",
+            descripcion = null,
+            precio = 3.00
+        ),
+        Aperitivo(
+            id = 4005,
+            nombre = "Patatas fritas",
+            descripcion = "- Con salsha cheddar y bacon ahumado",
+            precio = 2.00
+        ),
+        Aperitivo(
+            id = 4006,
+            nombre = "Nachos",
+            descripcion = "- Con salsa cheddar y bacon ahumado",
+            precio = 1.20
+        ),
+        Aperitivo(
+            id = 4007,
+            nombre = "Nachos",
+            descripcion = "- Con salsa cheddar y guacamole",
+            precio = 1.20
+        ),
+        Aperitivo(
+            id = 4008,
+            nombre = "Patatas fritas 4 salsas",
+            descripcion = "- Salsa 100M, ketchup, alioli y brava",
+            precio = 2.00
+        ),
+        Aperitivo(
+            id = 4009,
+            nombre = "Palomitas de pollo",
+            descripcion = "- mayonesa (9uds.)",
+            precio = 1.20
+        ),
+        Aperitivo(
+            id = 4010,
+            nombre = "Palomitas de queso gouda",
+            descripcion = "- mermelada de fresa (9 uds.)",
+            precio = 2.00
+        ),
+        Aperitivo(
+            id = 4011,
+            nombre = "Salchichas 4 salsas",
+            descripcion = "- Salsa 100M, ketchup, alioli y brava",
+            precio = 1.20
+        ),
+        Aperitivo(
+            id = 4012,
+            nombre = "Cheesy Cheetos Bites (7 uds.)",
+            descripcion = null,
+            precio = 2.00
+        ),
     )
 
     val ensaladas = listOf(
