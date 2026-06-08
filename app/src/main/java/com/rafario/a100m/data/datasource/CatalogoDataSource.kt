@@ -1133,28 +1133,28 @@ object CatalogoDataSource {
             precio = 2.00
         ),
         Bebida(
-            id = 2027,
+            id = 2030,
             nombre = "Sprite",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CLASICAS,
             precio = 2.00
         ),
         Bebida(
-            id = 2028,
+            id = 2031,
             nombre = "Fuze Tea",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CLASICAS,
             precio = 2.00
         ),
         Bebida(
-            id = 2029,
+            id = 2032,
             nombre = "Aquarius",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CLASICAS,
             precio = 2.00
         ),
         Bebida(
-            id = 2030,
+            id = 2033,
             nombre = "Appletiser",
             tamano = "275 ml",
             tipoBebida = TipoBebida.CLASICAS,
@@ -1164,21 +1164,21 @@ object CatalogoDataSource {
 
         //region ENERGETICAS
         Bebida(
-            id = 2031,
+            id = 2034,
             nombre = "Monster Green",
             tamano = "500 ml",
             tipoBebida = TipoBebida.ENERGETICAS,
             precio = 2.00
         ),
         Bebida(
-            id = 2032,
+            id = 2035,
             nombre = "Monster Mango Loco",
             tamano = "500 ml",
             tipoBebida = TipoBebida.ENERGETICAS,
             precio = 2.00
         ),
         Bebida(
-            id = 2033,
+            id = 2036,
             nombre = "Monster Ultra White",
             tamano = "500 ml",
             tipoBebida = TipoBebida.ENERGETICAS,
@@ -1188,28 +1188,28 @@ object CatalogoDataSource {
 
         //region VINO
         Bebida(
-            id = 2034,
+            id = 2037,
             nombre = "Buenos Días Ribera de Duero",
             tamano = "10,70 cl",
             tipoBebida = TipoBebida.VINO,
             precio = 2.00
         ),
         Bebida(
-            id = 2035,
+            id = 2038,
             nombre = "Cune rosado Navarra",
             tamano = "10,70 cl",
             tipoBebida = TipoBebida.VINO,
             precio = 2.00
         ),
         Bebida(
-            id = 2036,
+            id = 2039,
             nombre = "Cune blanco Verdejo",
             tamano = "10,70 cl",
             tipoBebida = TipoBebida.VINO,
             precio = 2.00
         ),
         Bebida(
-            id = 2037,
+            id = 2040,
             nombre = "Cune tinto Crianza Rioja",
             tamano = "10,70 cl",
             tipoBebida = TipoBebida.VINO,
@@ -1219,28 +1219,28 @@ object CatalogoDataSource {
 
         //region CAFE E INFUSIONES
         Bebida(
-            id = 2038,
+            id = 2041,
             nombre = "Café natural",
             tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
         Bebida(
-            id = 2039,
+            id = 2042,
             nombre = "Infusiones",
             tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
         Bebida(
-            id = 2040,
+            id = 2043,
             nombre = "Batidos",
             tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
             precio = 2.00
         ),
         Bebida(
-            id = 2041,
+            id = 2044,
             nombre = "Zumo",
             tamano = "20 cl",
             tipoBebida = TipoBebida.CAFE_INFUSIONES,

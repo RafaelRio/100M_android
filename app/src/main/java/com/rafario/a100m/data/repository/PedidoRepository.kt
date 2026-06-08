@@ -48,6 +48,27 @@ class PedidoRepository(
             preferences[pedidosKey] = updatedPedidos.toJson()
         }
     }
+
+    suspend fun updatePedido(
+        pedidoId: Int,
+        nombre: String,
+        lineas: List<LineaPedido>
+    ) {
+        val updatedPedidos = pedidos.first().map { pedido ->
+            if (pedido.id == pedidoId) {
+                pedido.copy(
+                    nombre = nombre,
+                    lineas = lineas
+                )
+            } else {
+                pedido
+            }
+        }
+
+        context.pedidosDataStore.edit { preferences ->
+            preferences[pedidosKey] = updatedPedidos.toJson()
+        }
+    }
 }
 
 private fun List<Pedido>.toJson(): String {

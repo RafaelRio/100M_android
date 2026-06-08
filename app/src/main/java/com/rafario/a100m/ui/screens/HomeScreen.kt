@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Whatsapp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -51,6 +52,7 @@ import java.util.Locale
 fun HomeScreen(
     pedidos: List<Pedido>,
     onDeleteOrderClick: (Int) -> Unit,
+    onEditOrderClick: (Int) -> Unit,
     onCreateOrderClick: () -> Unit
 ) {
     Scaffold(
@@ -95,6 +97,9 @@ fun HomeScreen(
                 ) { index ->
                     OrderCard(
                         pedido = pedidos[index],
+                        onEditClick = {
+                            onEditOrderClick(pedidos[index].id)
+                        },
                         onDeleteClick = {
                             onDeleteOrderClick(pedidos[index].id)
                         }
@@ -108,6 +113,7 @@ fun HomeScreen(
 @Composable
 private fun OrderCard(
     pedido: Pedido,
+    onEditClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -191,6 +197,20 @@ private fun OrderCard(
                 )
                 Text(
                     text = "Compartir por WhatsApp",
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = onEditClick
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = null
+                )
+                Text(
+                    text = "Editar pedido",
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }

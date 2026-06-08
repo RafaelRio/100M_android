@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -50,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import com.rafario.a100m.data.datasource.CatalogoDataSource
 import com.rafario.a100m.data.models.Bebida
 import com.rafario.a100m.data.models.LineaPedido
+import com.rafario.a100m.data.models.Pedido
 import com.rafario.a100m.data.models.TipoProducto
 import java.time.LocalDate
 import java.util.Locale
@@ -57,12 +59,21 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateOrderScreen(
+    pedidoToEdit: Pedido? = null,
     onBackClick: () -> Unit,
-    onOrderCreated: (String, List<LineaPedido>) -> Unit
+    onOrderSaved: (String, List<LineaPedido>) -> Unit
 ) {
     val today = LocalDate.now().dayOfWeek
-    val cartLines = remember { mutableStateMapOf<Int, LineaPedido>() }
-    var orderName by rememberSaveable { mutableStateOf("") }
+    val cartLines = remember(pedidoToEdit?.id) {
+        mutableStateMapOf<Int, LineaPedido>().apply {
+            pedidoToEdit?.lineas?.forEach { linea ->
+                put(linea.productoId, linea)
+            }
+        }
+    }
+    var orderName by rememberSaveable(pedidoToEdit?.id) {
+        mutableStateOf(pedidoToEdit?.nombre.orEmpty())
+    }
     var showConfirmationDialog by rememberSaveable { mutableStateOf(false) }
     var montaditosExpanded by rememberSaveable { mutableStateOf(false) }
     var bebidasExpanded by rememberSaveable { mutableStateOf(false) }
@@ -99,12 +110,21 @@ fun CreateOrderScreen(
             )
     }
 
+    fun removeProductFromCart(id: Int) {
+        val currentLine = cartLines[id] ?: return
+        if (currentLine.cantidad <= 1) {
+            cartLines.remove(id)
+        } else {
+            cartLines[id] = currentLine.copy(cantidad = currentLine.cantidad - 1)
+        }
+    }
+
     Scaffold(
 
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Nuevo pedido")
+                    Text(text = if (pedidoToEdit == null) "Nuevo pedido" else "Editar pedido")
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -129,7 +149,11 @@ fun CreateOrderScreen(
                     ) {
                         Icon(
                             Icons.Default.Check,
-                            contentDescription = "Crear pedido"
+                            contentDescription = if (pedidoToEdit == null) {
+                                "Crear pedido"
+                            } else {
+                                "Guardar cambios"
+                            }
                         )
                     }
                 }
@@ -146,7 +170,7 @@ fun CreateOrderScreen(
                 },
                 onConfirm = {
                     showConfirmationDialog = false
-                    onOrderCreated(trimmedOrderName, cartLines.values.toList())
+                    onOrderSaved(trimmedOrderName, cartLines.values.toList())
                 }
             )
         }
@@ -226,6 +250,9 @@ fun CreateOrderScreen(
                                 price = price,
                                 tipoProducto = TipoProducto.MONTADITO
                             )
+                        },
+                        onRemoveClick = {
+                            removeProductFromCart(montadito.id)
                         }
                     )
                     SectionDivider(index, CatalogoDataSource.montaditos.lastIndex)
@@ -262,6 +289,9 @@ fun CreateOrderScreen(
                                     name = bebidaName,
                                     price = price
                                 )
+                            },
+                            onRemoveClick = {
+                                removeProductFromCart(bebida.id)
                             }
                         )
                         SectionDivider(index, bebidas.lastIndex)
@@ -293,6 +323,9 @@ fun CreateOrderScreen(
                                 name = racion.nombre,
                                 price = price
                             )
+                        },
+                        onRemoveClick = {
+                            removeProductFromCart(racion.id)
                         }
                     )
                     SectionDivider(index, CatalogoDataSource.raciones.lastIndex)
@@ -325,6 +358,9 @@ fun CreateOrderScreen(
                                 price = price,
                                 observaciones = aperitivo.descripcion
                             )
+                        },
+                        onRemoveClick = {
+                            removeProductFromCart(aperitivo.id)
                         }
                     )
                     SectionDivider(index, CatalogoDataSource.aperitivos.lastIndex)
@@ -356,6 +392,9 @@ fun CreateOrderScreen(
                                 name = ensalada.nombre,
                                 price = price
                             )
+                        },
+                        onRemoveClick = {
+                            removeProductFromCart(ensalada.id)
                         }
                     )
                     SectionDivider(index, CatalogoDataSource.ensaladas.lastIndex)
@@ -389,6 +428,9 @@ fun CreateOrderScreen(
                                 name = montyAhorro.nombre,
                                 price = price
                             )
+                        },
+                        onRemoveClick = {
+                            removeProductFromCart(montyAhorro.id)
                         }
                     )
                     SectionDivider(index, CatalogoDataSource.montyAhorros.lastIndex)
@@ -541,7 +583,8 @@ private fun ProductRow(
     supportingText: String? = null,
     supportingItems: List<String> = emptyList(),
     currentPrice: Double,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onRemoveClick: (() -> Unit)? = null
 ) {
     Row(
         modifier = Modifier
@@ -552,17 +595,34 @@ private fun ProductRow(
         verticalAlignment = Alignment.Top
     ) {
         if (quantity > 0) {
-            Surface(
-                color = MaterialTheme.colorScheme.primary,
-                shape = MaterialTheme.shapes.small
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "x$quantity",
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                Surface(
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = MaterialTheme.shapes.small
+                ) {
+                    Text(
+                        text = "x$quantity",
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+                if (onRemoveClick != null) {
+                    IconButton(
+                        modifier = Modifier.size(28.dp),
+                        onClick = onRemoveClick
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Remove,
+                            contentDescription = "Quitar una unidad",
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
+                }
             }
         }
 

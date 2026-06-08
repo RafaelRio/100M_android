@@ -19,6 +19,9 @@ private object AppRoute {
     const val SPLASH = "splash"
     const val HOME = "home"
     const val CREATE_ORDER = "create_order"
+    const val EDIT_ORDER = "edit_order"
+
+    fun editOrder(pedidoId: Int): String = "$EDIT_ORDER/$pedidoId"
 }
 
 @Composable
@@ -55,6 +58,9 @@ fun AppNavGraph() {
                         pedidoRepository.deletePedido(pedidoId)
                     }
                 },
+                onEditOrderClick = { pedidoId ->
+                    navController.navigate(AppRoute.editOrder(pedidoId))
+                },
                 onCreateOrderClick = {
                     navController.navigate(AppRoute.CREATE_ORDER)
                 }
@@ -66,9 +72,32 @@ fun AppNavGraph() {
                 onBackClick = {
                     navController.popBackStack()
                 },
-                onOrderCreated = { nombre, lineas ->
+                onOrderSaved = { nombre, lineas ->
                     coroutineScope.launch {
                         pedidoRepository.addPedido(nombre, lineas)
+                        navController.popBackStack()
+                    }
+                }
+            )
+        }
+
+        composable("${AppRoute.EDIT_ORDER}/{pedidoId}") { backStackEntry ->
+            val pedidoId = backStackEntry.arguments?.getString("pedidoId")?.toIntOrNull()
+            val pedido = pedidos.firstOrNull { it.id == pedidoId }
+
+            CreateOrderScreen(
+                pedidoToEdit = pedido,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onOrderSaved = { nombre, lineas ->
+                    if (pedidoId == null) {
+                        navController.popBackStack()
+                        return@CreateOrderScreen
+                    }
+
+                    coroutineScope.launch {
+                        pedidoRepository.updatePedido(pedidoId, nombre, lineas)
                         navController.popBackStack()
                     }
                 }
