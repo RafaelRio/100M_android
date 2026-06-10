@@ -16,7 +16,7 @@ object CatalogoDataSource {
         Montadito(
             id = 1,
             nombre = "Jamón gran reserva con aceite de oliva",
-            precio = 1.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -25,7 +25,7 @@ object CatalogoDataSource {
         Montadito(
             id = 2,
             nombre = "Tortilla de patatas y tomate",
-            precio = 1.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -34,7 +34,7 @@ object CatalogoDataSource {
         Montadito(
             id = 3,
             nombre = "Pulled pork BBQ",
-            precio = 2.00,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -43,7 +43,7 @@ object CatalogoDataSource {
         Montadito(
             id = 4,
             nombre = "Pollo y salsa alioli",
-            precio = 2.00,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -52,7 +52,7 @@ object CatalogoDataSource {
         Montadito(
             id = 5,
             nombre = "Carrillera al vino tinto",
-            precio = 2.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -61,7 +61,7 @@ object CatalogoDataSource {
         Montadito(
             id = 6,
             nombre = "Calamarcitos y mayonesa",
-            precio = 2.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -70,7 +70,7 @@ object CatalogoDataSource {
         Montadito(
             id = 7,
             nombre = "Pollo kebab y salsa BBQ",
-            precio = 2.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -79,7 +79,7 @@ object CatalogoDataSource {
         Montadito(
             id = 8,
             nombre = "Bacon ahumado y queso madurado",
-            precio = 2.00,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -88,7 +88,7 @@ object CatalogoDataSource {
         Montadito(
             id = 9,
             nombre = "Torreznos y salsa brava",
-            precio = 1.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -97,16 +97,17 @@ object CatalogoDataSource {
         Montadito(
             id = 10,
             nombre = "Lomo al ajillo y salsa 100M",
-            precio = 1.50,
+            precio = 1.10,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
+
         Montadito(
             id = 11,
             nombre = "Tortilla de patatas y queso madurado",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -115,7 +116,7 @@ object CatalogoDataSource {
         Montadito(
             id = 12,
             nombre = "Tortilla de patatas, bacon ahumado y salsa alioli",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -124,7 +125,7 @@ object CatalogoDataSource {
         Montadito(
             id = 13,
             nombre = "Tortilla de patatas, tomate y mayonesa",
-            precio = 1.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -133,7 +134,7 @@ object CatalogoDataSource {
         Montadito(
             id = 14,
             nombre = "Tortilla de patatas y mojo picón",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -142,7 +143,7 @@ object CatalogoDataSource {
         Montadito(
             id = 15,
             nombre = "Tortilla de patatas, patatas paja y salsa 100M",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -151,7 +152,7 @@ object CatalogoDataSource {
         Montadito(
             id = 16,
             nombre = "Tortilla de patatas, cebolla crujiente y salsa BBQ",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -160,7 +161,7 @@ object CatalogoDataSource {
         Montadito(
             id = 17,
             nombre = "Pollo y queso madurado",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -169,7 +170,7 @@ object CatalogoDataSource {
         Montadito(
             id = 18,
             nombre = "Pollo, tomate y mojo picón",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -178,7 +179,7 @@ object CatalogoDataSource {
         Montadito(
             id = 19,
             nombre = "Pollo, patatas paja y salsa de mostaza y miel",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -187,7 +188,7 @@ object CatalogoDataSource {
         Montadito(
             id = 20,
             nombre = "Pollo, bacon ahumado y mayonesa",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -196,7 +197,7 @@ object CatalogoDataSource {
         Montadito(
             id = 21,
             nombre = "Pollo, patatas paja y salsa BBQ",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -205,7 +206,7 @@ object CatalogoDataSource {
         Montadito(
             id = 22,
             nombre = "Pollo kebab y tomate",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -214,7 +215,7 @@ object CatalogoDataSource {
         Montadito(
             id = 23,
             nombre = "Pollo kebab y salsa cheddar",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -223,7 +224,7 @@ object CatalogoDataSource {
         Montadito(
             id = 24,
             nombre = "Pollo kebab, tomate y salsa 100M",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -232,7 +233,7 @@ object CatalogoDataSource {
         Montadito(
             id = 25,
             nombre = "Pollo kebab, patatas paja y salsa BBQ",
-            precio = 2.00,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -241,16 +242,17 @@ object CatalogoDataSource {
         Montadito(
             id = 26,
             nombre = "Pollo kebab, bacon ahumado y mayonesa",
-            precio = 2.50,
+            precio = 1.40,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
+
         Montadito(
             id = 27,
             nombre = "Pulled pork BBQ y salsa cheddar",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -259,7 +261,7 @@ object CatalogoDataSource {
         Montadito(
             id = 28,
             nombre = "Pulled pork BBQ y bacon ahumado",
-            precio = 2.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -268,7 +270,7 @@ object CatalogoDataSource {
         Montadito(
             id = 29,
             nombre = "Pulled pork BBQ y salsa brava",
-            precio = 2.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -277,7 +279,7 @@ object CatalogoDataSource {
         Montadito(
             id = 30,
             nombre = "Pulled pork BBQ y patatas paja",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -286,7 +288,7 @@ object CatalogoDataSource {
         Montadito(
             id = 31,
             nombre = "Pulled pork BBQ y cebolla crujiente",
-            precio = 1.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -295,7 +297,7 @@ object CatalogoDataSource {
         Montadito(
             id = 32,
             nombre = "Lomo al ajillo y queso madurado",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -304,7 +306,7 @@ object CatalogoDataSource {
         Montadito(
             id = 33,
             nombre = "Lomo al ajillo y queso gorgonzola",
-            precio = 1.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -313,7 +315,7 @@ object CatalogoDataSource {
         Montadito(
             id = 34,
             nombre = "Lomo al ajillo y mojo picón",
-            precio = 2.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -322,7 +324,7 @@ object CatalogoDataSource {
         Montadito(
             id = 35,
             nombre = "Lomo al ajillo, tomate y patatas paja",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -331,7 +333,7 @@ object CatalogoDataSource {
         Montadito(
             id = 36,
             nombre = "Lomo al ajillo, tomate y mayonesa",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -340,7 +342,7 @@ object CatalogoDataSource {
         Montadito(
             id = 37,
             nombre = "Lomo al ajillo, bacon ahumado y salsa alioli",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -349,7 +351,7 @@ object CatalogoDataSource {
         Montadito(
             id = 38,
             nombre = "Calamarcitos y salsa alioli",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -358,7 +360,7 @@ object CatalogoDataSource {
         Montadito(
             id = 39,
             nombre = "Calamarcitos y salsa 100M",
-            precio = 1.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -367,7 +369,7 @@ object CatalogoDataSource {
         Montadito(
             id = 40,
             nombre = "Calamarcitos y guacamole",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -376,7 +378,7 @@ object CatalogoDataSource {
         Montadito(
             id = 41,
             nombre = "Calamarcitos, salsa brava y mayonesa",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -385,7 +387,7 @@ object CatalogoDataSource {
         Montadito(
             id = 42,
             nombre = "Calamarcitos, tomate y mayonesa",
-            precio = 2.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -394,7 +396,7 @@ object CatalogoDataSource {
         Montadito(
             id = 43,
             nombre = "Bacon ahumado, tomate y mayonesa",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -403,7 +405,7 @@ object CatalogoDataSource {
         Montadito(
             id = 44,
             nombre = "Bacon ahumado, cebolla crujiente y salsa 100M",
-            precio = 1.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -412,7 +414,7 @@ object CatalogoDataSource {
         Montadito(
             id = 45,
             nombre = "Bacon ahumado, tomate y queso gorgonzola",
-            precio = 2.00,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -421,7 +423,7 @@ object CatalogoDataSource {
         Montadito(
             id = 46,
             nombre = "Bacon ahumado, patatas paja y mayonesa",
-            precio = 2.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -430,16 +432,17 @@ object CatalogoDataSource {
         Montadito(
             id = 47,
             nombre = "Bacon ahumado, tomate y queso madurado",
-            precio = 2.50,
+            precio = 1.60,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
+
         Montadito(
             id = 48,
             nombre = "Jamón Gran Reserva y mantequilla",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -448,7 +451,7 @@ object CatalogoDataSource {
         Montadito(
             id = 49,
             nombre = "Jamón Gran Reserva y tomate",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -457,7 +460,7 @@ object CatalogoDataSource {
         Montadito(
             id = 50,
             nombre = "Jamón Gran Reserva, tomate y patatas paja",
-            precio = 2.00,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -466,7 +469,7 @@ object CatalogoDataSource {
         Montadito(
             id = 51,
             nombre = "Jamón Gran Reserva y tortilla de patatas",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -475,7 +478,7 @@ object CatalogoDataSource {
         Montadito(
             id = 52,
             nombre = "Carrillera al vino tinto y salsa alioli",
-            precio = 1.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -484,7 +487,7 @@ object CatalogoDataSource {
         Montadito(
             id = 53,
             nombre = "Carrillera al vino tinto y patatas paja",
-            precio = 1.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -493,7 +496,7 @@ object CatalogoDataSource {
         Montadito(
             id = 54,
             nombre = "Carrillera al vino tinto y tomate",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -502,7 +505,7 @@ object CatalogoDataSource {
         Montadito(
             id = 55,
             nombre = "Carrillera al vino tinto y cebolla crujiente",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -511,7 +514,7 @@ object CatalogoDataSource {
         Montadito(
             id = 56,
             nombre = "Carrillera al vino tinto y bacon ahumado",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -520,7 +523,7 @@ object CatalogoDataSource {
         Montadito(
             id = 57,
             nombre = "Torreznos y mayonesa",
-            precio = 2.00,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -529,7 +532,7 @@ object CatalogoDataSource {
         Montadito(
             id = 58,
             nombre = "Torreznos y salsa alioli",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -538,7 +541,7 @@ object CatalogoDataSource {
         Montadito(
             id = 59,
             nombre = "Torreznos y salsa 100M",
-            precio = 2.00,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -547,7 +550,7 @@ object CatalogoDataSource {
         Montadito(
             id = 60,
             nombre = "Salmón ahumado y queso gorgonzola",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -556,7 +559,7 @@ object CatalogoDataSource {
         Montadito(
             id = 61,
             nombre = "Salmón ahumado y tomate",
-            precio = 2.00,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -565,7 +568,7 @@ object CatalogoDataSource {
         Montadito(
             id = 62,
             nombre = "Salmón ahumado y salsa de mostaza y miel",
-            precio = 1.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -574,7 +577,7 @@ object CatalogoDataSource {
         Montadito(
             id = 63,
             nombre = "Salmón ahumado y guacamole",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -583,7 +586,7 @@ object CatalogoDataSource {
         Montadito(
             id = 64,
             nombre = "Chorizo parrillero y salsa brava",
-            precio = 2.00,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -592,7 +595,7 @@ object CatalogoDataSource {
         Montadito(
             id = 65,
             nombre = "Chorizo parrillero y queso gorgonzola",
-            precio = 1.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -601,7 +604,7 @@ object CatalogoDataSource {
         Montadito(
             id = 66,
             nombre = "Chorizo parrillero y salsa BBQ",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -610,16 +613,17 @@ object CatalogoDataSource {
         Montadito(
             id = 67,
             nombre = "Chorizo parrillero y guacamole",
-            precio = 1.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
+
         Montadito(
             id = 68,
             nombre = "Montycookie doble chocolate y sirope de caramelo toffee",
-            precio = 1.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -628,7 +632,7 @@ object CatalogoDataSource {
         Montadito(
             id = 69,
             nombre = "Montycookie chocolate y sirope de pistacho",
-            precio = 2.00,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -637,12 +641,13 @@ object CatalogoDataSource {
         Montadito(
             id = 70,
             nombre = "Montycookie chocolate y sirope de chocolate",
-            precio = 2.50,
+            precio = 1.80,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
+
         Montadito(
             id = 71,
             nombre = "Piadina de jamón cocido y queso mozzarella",
@@ -655,7 +660,7 @@ object CatalogoDataSource {
         Montadito(
             id = 72,
             nombre = "Piadina de pepperoni y queso mozzarella",
-            precio = 2.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -664,7 +669,7 @@ object CatalogoDataSource {
         Montadito(
             id = 73,
             nombre = "Piadina de pollo, tomate, queso mozzarella y orégano",
-            precio = 2.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -682,16 +687,17 @@ object CatalogoDataSource {
         Montadito(
             id = 75,
             nombre = "Piadina de jamón cocido, queso madurado y tomate",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
             )
         ),
+
         Montadito(
             id = 76,
             nombre = "Hot dog, kétchup y mayonesa",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -718,7 +724,7 @@ object CatalogoDataSource {
         Montadito(
             id = 79,
             nombre = "Hot dog, patatas paja y salsa alioli",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -736,7 +742,7 @@ object CatalogoDataSource {
         Montadito(
             id = 81,
             nombre = "Burger, queso madurado, tomate y mayonesa",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -745,7 +751,7 @@ object CatalogoDataSource {
         Montadito(
             id = 82,
             nombre = "Burger, queso madurado y mojo picón",
-            precio = 2.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -754,7 +760,7 @@ object CatalogoDataSource {
         Montadito(
             id = 83,
             nombre = "Burger, guacamole y bacon ahumado",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -763,7 +769,7 @@ object CatalogoDataSource {
         Montadito(
             id = 84,
             nombre = "Burger, bacon ahumado y salsa cheddar",
-            precio = 2.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -790,7 +796,7 @@ object CatalogoDataSource {
         Montadito(
             id = 87,
             nombre = "Pollo: pollo kebab, queso mozzarella, salsa pizza y orégano",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -817,7 +823,7 @@ object CatalogoDataSource {
         Montadito(
             id = 90,
             nombre = "Pepperoni: pepperoni, queso mozzarella, salsa pizza y orégano",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -835,7 +841,7 @@ object CatalogoDataSource {
         Montadito(
             id = 92,
             nombre = "Salmón ahumado y huevo hilado",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -871,7 +877,7 @@ object CatalogoDataSource {
         Montadito(
             id = 96,
             nombre = "Jamón cocido, queso madurado y mantequilla",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -880,7 +886,7 @@ object CatalogoDataSource {
         Montadito(
             id = 97,
             nombre = "Jamón cocido, queso madurado, tomate y mayonesa",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -907,7 +913,7 @@ object CatalogoDataSource {
         Montadito(
             id = 100,
             nombre = "Jamón Gran Reserva y mantequilla",
-            precio = 1.50,
+            precio = 2.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.WEDNESDAY, 1.00),
                 PrecioEspecial(DayOfWeek.SUNDAY, 1.00),
@@ -950,56 +956,56 @@ object CatalogoDataSource {
             nombre = "Jarra Quijote de Cruzcampo Radler",
             tamano = "250 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 1.50
+            precio = 2.00
         ),
         Bebida(
             id = 2006,
             nombre = "Jarra Quijote de Ladrón de Manzana",
             tamano = "250 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 1.50
+            precio = 2.00
         ),
         Bebida(
             id = 2007,
             nombre = "Jarra Quijote de Heineken",
             tamano = "250 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 1.50
+            precio = 2.00
         ),
         Bebida(
             id = 2008,
             nombre = "Jarra Quijote de El Águila Dorada",
             tamano = "250 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 1.50
+            precio = 2.00
         ),
         Bebida(
             id = 2009,
             nombre = "Jarra Sancho de Cruzcampo Radler",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 2.50
+            precio = 3.00
         ),
         Bebida(
             id = 2010,
             nombre = "Jarra Sancho de Ladrón de Manzanas",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 2.50
+            precio = 3.00
         ),
         Bebida(
             id = 2011,
             nombre = "Jarra Sancho de Heineken",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 2.50
+            precio = 3.00
         ),
         Bebida(
             id = 2012,
             nombre = "Jarra Sancho de El Águila Dorada",
             tamano = "500 ml",
             tipoBebida = TipoBebida.CERVEZA_PREMIUM,
-            precio = 2.50
+            precio = 3.00
         ),
         //endregion
 
@@ -1009,14 +1015,14 @@ object CatalogoDataSource {
             nombre = "Cruzcampo sin gluten (tercio)",
             tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
-            precio = 1.50
+            precio = 2.50
         ),
         Bebida(
             id = 2014,
             nombre = "Heineken 0,0 (tercio)",
             tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
-            precio = 1.50
+            precio = 2.50
         ),
         Bebida(
             id = 2015,
@@ -1030,7 +1036,7 @@ object CatalogoDataSource {
             nombre = "Paulaner (media)",
             tamano = null,
             tipoBebida = TipoBebida.CERVEZA_BOTELLA,
-            precio = 2.50
+            precio = 3.50
         ),
         //endregion
 
@@ -1040,49 +1046,49 @@ object CatalogoDataSource {
             nombre = "Ron Havana Club Origen",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 1.50
+            precio = 6.00
         ),
         Bebida(
             id = 2018,
             nombre = "Ginebra Beefeater",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 1.50
+            precio = 6.00
         ),
         Bebida(
             id = 2019,
             nombre = "Beefeater 0,0",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 1.50
+            precio = 6.00
         ),
         Bebida(
             id = 2020,
             nombre = "Whisky Ballantine´s",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 1.50
+            precio = 6.00
         ),
         Bebida(
             id = 2021,
             nombre = "Vodka Absolut",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 2.50
+            precio = 6.00
         ),
         Bebida(
             id = 2022,
             nombre = "Petroni Spritz",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 2.50
+            precio = 6.00
         ),
         Bebida(
             id = 2023,
             nombre = "Crema Ruavieja",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_PREMIUM,
-            precio = 2.50
+            precio = 6.00
         ),
         //endregion
 
@@ -1092,21 +1098,21 @@ object CatalogoDataSource {
             nombre = "Absolut & Sprite",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_CHILL,
-            precio = 2.50
+            precio = 3.50
         ),
         Bebida(
             id = 2025,
             nombre = "Bacardi & Coke",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_CHILL,
-            precio = 2.50
+            precio = 3.50
         ),
         Bebida(
             id = 2026,
             nombre = "Jack & Coke",
             tamano = null,
             tipoBebida = TipoBebida.TARDEO_CHILL,
-            precio = 2.50
+            precio = 3.50
         ),
         //endregion
 
@@ -1158,7 +1164,7 @@ object CatalogoDataSource {
             nombre = "Appletiser",
             tamano = "275 ml",
             tipoBebida = TipoBebida.CLASICAS,
-            precio = 2.00
+            precio = 2.20
         ),
         //endregion
 
@@ -1168,21 +1174,21 @@ object CatalogoDataSource {
             nombre = "Monster Green",
             tamano = "500 ml",
             tipoBebida = TipoBebida.ENERGETICAS,
-            precio = 2.00
+            precio = 3.00
         ),
         Bebida(
             id = 2035,
             nombre = "Monster Mango Loco",
             tamano = "500 ml",
             tipoBebida = TipoBebida.ENERGETICAS,
-            precio = 2.00
+            precio = 3.00
         ),
         Bebida(
             id = 2036,
             nombre = "Monster Ultra White",
             tamano = "500 ml",
             tipoBebida = TipoBebida.ENERGETICAS,
-            precio = 2.00
+            precio = 3.00
         ),
         //endregion
 
@@ -1223,28 +1229,42 @@ object CatalogoDataSource {
             nombre = "Café natural",
             tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
-            precio = 2.00
+            precio = 1.40
+        ),
+        Bebida(
+            id = 2045,
+            nombre = "Café natural con extra de crema Ruavieja",
+            tamano = null,
+            tipoBebida = TipoBebida.CAFE_INFUSIONES,
+            precio = 1.90
         ),
         Bebida(
             id = 2042,
             nombre = "Infusiones",
             tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
-            precio = 2.00
+            precio = 1.30
         ),
         Bebida(
             id = 2043,
             nombre = "Batidos",
             tamano = null,
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
-            precio = 2.00
+            precio = 1.50
+        ),
+        Bebida(
+            id = 2046,
+            nombre = "Agua",
+            tamano = "50 cl",
+            tipoBebida = TipoBebida.CAFE_INFUSIONES,
+            precio = 2.20
         ),
         Bebida(
             id = 2044,
             nombre = "Zumo",
             tamano = "20 cl",
             tipoBebida = TipoBebida.CAFE_INFUSIONES,
-            precio = 2.00
+            precio = 1.80
         ),
         //endregion
     )
@@ -1253,37 +1273,37 @@ object CatalogoDataSource {
         Racion(
             id = 3001,
             nombre = "Patatas fritas Bravioli",
-            precio = 4.50
+            precio = 7.50
         ),
         Racion(
             id = 3002,
             nombre = "Torreznos",
-            precio = 5.50
+            precio = 7.50
         ),
         Racion(
             id = 3003,
             nombre = "Croquetas de Jamón (13 uds.)",
-            precio = 5.00
+            precio = 7.50
         ),
         Racion(
             id = 3004,
             nombre = "Croquetas de Mac&Cheese (10 uds.)",
-            precio = 6.50
+            precio = 7.50
         ),
         Racion(
             id = 3005,
             nombre = "Alitas de pollo BBQ (9 uds.)",
-            precio = 5.00
+            precio = 7.50
         ),
         Racion(
             id = 3006,
             nombre = "Alitas de pollo salsa Brava (9 uds.)",
-            precio = 5.00
+            precio = 7.50
         ),
         Racion(
             id = 3007,
             nombre = "Tiras de pollo",
-            precio = 6.50
+            precio = 7.50
         )
     )
 
@@ -1292,25 +1312,25 @@ object CatalogoDataSource {
             id = 4001,
             nombre = "Aceitunas",
             descripcion = "- De la abuela.",
-            precio = 1.50
+            precio = 1.00
         ),
         Aperitivo(
             id = 4002,
             nombre = "Cucurucho de patatas chips",
             descripcion = null,
-            precio = 1.20
+            precio = 1.00
         ),
         Aperitivo(
             id = 4003,
             nombre = "Glidas de boquerón",
             descripcion = null,
-            precio = 3.00
+            precio = 1.50
         ),
         Aperitivo(
             id = 4004,
             nombre = "Glidas de anchoa",
             descripcion = null,
-            precio = 3.00
+            precio = 1.50
         ),
         Aperitivo(
             id = 4005,
@@ -1322,13 +1342,13 @@ object CatalogoDataSource {
             id = 4006,
             nombre = "Nachos",
             descripcion = "- Con salsa cheddar y bacon ahumado",
-            precio = 1.20
+            precio = 2.00
         ),
         Aperitivo(
             id = 4007,
             nombre = "Nachos",
             descripcion = "- Con salsa cheddar y guacamole",
-            precio = 1.20
+            precio = 2.00
         ),
         Aperitivo(
             id = 4008,
@@ -1340,25 +1360,25 @@ object CatalogoDataSource {
             id = 4009,
             nombre = "Palomitas de pollo",
             descripcion = "- mayonesa (9uds.)",
-            precio = 1.20
+            precio = 2.50
         ),
         Aperitivo(
             id = 4010,
             nombre = "Palomitas de queso gouda",
             descripcion = "- mermelada de fresa (9 uds.)",
-            precio = 2.00
+            precio = 2.50
         ),
         Aperitivo(
             id = 4011,
             nombre = "Salchichas 4 salsas",
             descripcion = "- Salsa 100M, ketchup, alioli y brava",
-            precio = 1.20
+            precio = 2.50
         ),
         Aperitivo(
             id = 4012,
             nombre = "Cheesy Cheetos Bites (7 uds.)",
             descripcion = null,
-            precio = 2.00
+            precio = 2.50
         ),
     )
 
@@ -1367,13 +1387,13 @@ object CatalogoDataSource {
             id = 5001,
             nombre = "Ensalada Campera",
             ingredientes = "Lechuga, pollo, tomate, queso madurado, aceitunas, picatostes y salsa alioli",
-            precio = 6.50
+            precio = 3.50
         ),
         Ensalada(
             id = 5002,
             nombre = "Ensalada Texmex",
             ingredientes = "Lechuga, pollo kebab, tomate, maíz, aceitunas, nachos sabor TexMex y salsa mostaza y miel",
-            precio = 6.90
+            precio = 3.50
         )
     )
 
@@ -1382,7 +1402,7 @@ object CatalogoDataSource {
             id = 6001,
             nombre = "MontyCookie",
             montaditos = listOf(montaditos[67], montaditos[68], montaditos[69]),
-            precio = 4.00,
+            precio = 8.00,
             preciosEspeciales = listOf(
                 PrecioEspecial(DayOfWeek.MONDAY, 3.50)
             )
@@ -1397,7 +1417,7 @@ object CatalogoDataSource {
                 montaditos[73],
                 montaditos[74]
             ),
-            precio = 6.50
+            precio = 8.00
         ),
         MontyAhorro(
             id = 6003,
@@ -1409,7 +1429,7 @@ object CatalogoDataSource {
                 montaditos[78],
                 montaditos[79]
             ),
-            precio = 5.50
+            precio = 8.00
         ),
         MontyAhorro(
             id = 6004,
@@ -1421,7 +1441,7 @@ object CatalogoDataSource {
                 montaditos[83],
                 montaditos[84]
             ),
-            precio = 6.50
+            precio = 8.00
         ),
         MontyAhorro(
             id = 6005,
@@ -1433,7 +1453,7 @@ object CatalogoDataSource {
                 montaditos[88],
                 montaditos[89]
             ),
-            precio = 5.50
+            precio = 8.00
         )
     )
 }
