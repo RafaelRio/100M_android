@@ -1,5 +1,7 @@
 package com.rafario.a100m.ui.screens
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,11 +38,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
+import com.rafario.a100m.R
+import com.rafario.a100m.ui.formatting.formatMontaditoId
+import com.rafario.a100m.ui.formatting.formatPrice
+import com.rafario.a100m.ui.formatting.labelResource
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -49,22 +59,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.rafario.a100m.data.datasource.CatalogoDataSource
+import com.rafario.a100m.data.models.TipoBebida
 import com.rafario.a100m.data.models.Bebida
 import com.rafario.a100m.data.models.LineaPedido
 import com.rafario.a100m.data.models.Pedido
 import com.rafario.a100m.data.models.TipoProducto
 import java.time.LocalDate
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateOrderScreen(
     pedidoToEdit: Pedido? = null,
+    isSaving: Boolean = false,
     onBackClick: () -> Unit,
     onOrderSaved: (String, List<LineaPedido>) -> Unit
 ) {
     val today = LocalDate.now().dayOfWeek
-    val cartLines = remember(pedidoToEdit?.id) {
+    val cartLines = rememberSaveable(pedidoToEdit?.id, saver = CartLinesSaver) {
         mutableStateMapOf<Int, LineaPedido>().apply {
             pedidoToEdit?.lineas?.forEach { linea ->
                 put(linea.productoId, linea)
@@ -89,7 +100,7 @@ fun CreateOrderScreen(
     val cartTotal = cartLines.values.sumOf { it.subtotal }
     val cartProductCount = cartLines.values.sumOf { it.cantidad }
     val trimmedOrderName = orderName.trim()
-    val canCreateOrder = trimmedOrderName.isNotEmpty() && cartLines.isNotEmpty()
+    val canCreateOrder = !isSaving && trimmedOrderName.isNotEmpty() && cartLines.isNotEmpty()
 
     fun addProductToCart(
         id: Int,
@@ -124,7 +135,7 @@ fun CreateOrderScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = if (pedidoToEdit == null) "Nuevo pedido" else "Editar pedido")
+                    Text(text = if (pedidoToEdit == null) stringResource(R.string.new_order) else stringResource(R.string.edit_order))
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -136,7 +147,7 @@ fun CreateOrderScreen(
                     IconButton(onClick = onBackClick) {
                         Icon(
                             Icons.Default.ArrowBackIosNew,
-                            contentDescription = "Volver"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
@@ -150,9 +161,9 @@ fun CreateOrderScreen(
                         Icon(
                             Icons.Default.Check,
                             contentDescription = if (pedidoToEdit == null) {
-                                "Crear pedido"
+                                stringResource(R.string.create_order)
                             } else {
-                                "Guardar cambios"
+                                stringResource(R.string.save_changes)
                             }
                         )
                     }
@@ -184,13 +195,13 @@ fun CreateOrderScreen(
         ) {
             item(key = "header") {
                 Text(
-                    text = "Elige productos",
+                    text = stringResource(R.string.choose_products),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
                 )
                 Text(
-                    text = "Pulsa en un producto para añadirlo. Puedes repetir tantas veces como quieras.",
+                    text = stringResource(R.string.choose_products_hint),
                     modifier = Modifier.padding(top = 4.dp),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -206,11 +217,11 @@ fun CreateOrderScreen(
                         .padding(top = 12.dp),
                     shape = MaterialTheme.shapes.large,
                     label = {
-                        Text(text = "Nombre del pedido")
+                        Text(text = stringResource(R.string.order_name))
                     },
                     singleLine = true,
                     supportingText = {
-                        Text(text = "Obligatorio para crear el pedido")
+                        Text(text = stringResource(R.string.order_name_required))
                     },
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
                 )
@@ -227,7 +238,7 @@ fun CreateOrderScreen(
 
             item(key = "section_montaditos") {
                 ProductSectionHeader(
-                    title = "Montaditos",
+                    title = stringResource(R.string.category_montaditos),
                     expanded = montaditosExpanded,
                     onToggle = { montaditosExpanded = !montaditosExpanded }
                 )
@@ -241,7 +252,7 @@ fun CreateOrderScreen(
                     val price = montadito.precioPara(today)
                     ProductRow(
                         quantity = cartLines[montadito.id]?.cantidad ?: 0,
-                        name = "${formatMontaditoId(montadito.id)}. ${montadito.nombre}",
+                        name = stringResource(R.string.numbered_product, formatMontaditoId(montadito.id), montadito.nombre),
                         currentPrice = price,
                         onClick = {
                             addProductToCart(
@@ -261,7 +272,7 @@ fun CreateOrderScreen(
 
             item(key = "section_bebidas") {
                 ProductSectionHeader(
-                    title = "Bebidas",
+                    title = stringResource(R.string.category_drinks),
                     expanded = bebidasExpanded,
                     onToggle = { bebidasExpanded = !bebidasExpanded }
                 )
@@ -270,7 +281,7 @@ fun CreateOrderScreen(
             if (bebidasExpanded) {
                 bebidasByType.forEach { (tipoBebida, bebidas) ->
                     item(key = "bebida_group_${tipoBebida.name}") {
-                        ProductGroupHeader(title = tipoBebida.tipo)
+                        ProductGroupHeader(title = stringResource(tipoBebida.labelResource))
                     }
 
                     itemsIndexed(
@@ -301,7 +312,7 @@ fun CreateOrderScreen(
 
             item(key = "section_raciones") {
                 ProductSectionHeader(
-                    title = "Raciones",
+                    title = stringResource(R.string.category_portions),
                     expanded = racionesExpanded,
                     onToggle = { racionesExpanded = !racionesExpanded }
                 )
@@ -334,7 +345,7 @@ fun CreateOrderScreen(
 
             item(key = "section_aperitivos") {
                 ProductSectionHeader(
-                    title = "Aperitivos",
+                    title = stringResource(R.string.category_appetizers),
                     expanded = aperitivosExpanded,
                     onToggle = { aperitivosExpanded = !aperitivosExpanded }
                 )
@@ -369,7 +380,7 @@ fun CreateOrderScreen(
 
             item(key = "section_ensaladas") {
                 ProductSectionHeader(
-                    title = "Ensaladas",
+                    title = stringResource(R.string.category_salads),
                     expanded = ensaladasExpanded,
                     onToggle = { ensaladasExpanded = !ensaladasExpanded }
                 )
@@ -403,7 +414,7 @@ fun CreateOrderScreen(
 
             item(key = "section_monty_ahorros") {
                 ProductSectionHeader(
-                    title = "Monty ahorros",
+                    title = stringResource(R.string.category_monty_savings),
                     expanded = montyAhorrosExpanded,
                     onToggle = { montyAhorrosExpanded = !montyAhorrosExpanded }
                 )
@@ -419,7 +430,7 @@ fun CreateOrderScreen(
                         quantity = cartLines[montyAhorro.id]?.cantidad ?: 0,
                         name = montyAhorro.nombre,
                         supportingItems = montyAhorro.montaditos.map {
-                            "${formatMontaditoId(it.id)}. ${it.nombre}"
+                            stringResource(R.string.numbered_product, formatMontaditoId(it.id), it.nombre)
                         },
                         currentPrice = price,
                         onClick = {
@@ -451,10 +462,11 @@ private fun ConfirmOrderDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(text = "Confirmar pedido")
+            Text(text = stringResource(R.string.confirm_order))
         },
         text = {
             Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
@@ -469,7 +481,7 @@ private fun ConfirmOrderDialog(
                     )
                 }
                 Text(
-                    text = "Total: ${formatPrice(total)}",
+                    text = stringResource(R.string.order_total, formatPrice(total)),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
@@ -478,12 +490,12 @@ private fun ConfirmOrderDialog(
         },
         confirmButton = {
             Button(onClick = onConfirm) {
-                Text(text = "Aceptar")
+                Text(text = stringResource(R.string.accept))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = "Cancelar")
+                Text(text = stringResource(R.string.cancel))
             }
         }
     )
@@ -510,13 +522,13 @@ private fun CartSummary(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Carrito",
+                    text = stringResource(R.string.cart),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
-                    text = "$productCount productos añadidos",
+                    text = pluralStringResource(R.plurals.cart_product_count, productCount, productCount),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -568,7 +580,7 @@ private fun ProductSectionHeader(
             )
             Icon(
                 imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                contentDescription = if (expanded) "Contraer $title" else "Desplegar $title",
+                contentDescription = if (expanded) stringResource(R.string.collapse_category, title) else stringResource(R.string.expand_category, title),
                 modifier = Modifier.size(28.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -604,7 +616,7 @@ private fun ProductRow(
                     shape = MaterialTheme.shapes.small
                 ) {
                     Text(
-                        text = "x$quantity",
+                        text = stringResource(R.string.cart_quantity, quantity),
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = FontWeight.Bold,
@@ -613,12 +625,12 @@ private fun ProductRow(
                 }
                 if (onRemoveClick != null) {
                     IconButton(
-                        modifier = Modifier.size(28.dp),
+                        modifier = Modifier.size(48.dp),
                         onClick = onRemoveClick
                     ) {
                         Icon(
                             imageVector = Icons.Default.Remove,
-                            contentDescription = "Quitar una unidad",
+                            contentDescription = stringResource(R.string.remove_product_unit, name),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -650,7 +662,7 @@ private fun ProductRow(
                 ) {
                     supportingItems.forEach { item ->
                         Text(
-                            text = "• $item",
+                            text = stringResource(R.string.list_bullet, item),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -693,24 +705,42 @@ private fun SectionDivider(
     }
 }
 
-private fun formatPrice(price: Double): String {
-    return String.format(Locale.forLanguageTag("es-ES"), "%.2f €", price)
-}
-
+@Composable
 private fun Bebida.nombreConTamano(): String {
-    return tamano?.takeIf { it.isNotBlank() }?.let { "$nombre ($it)" } ?: nombre
+    return tamano?.takeIf { it.isNotBlank() }?.let { stringResource(R.string.product_with_size, nombre, it) } ?: nombre
 }
 
-private fun formatMontaditoId(id: Int): String {
-    val normalizedId = if (id in 1001..1100) id - 1000 else id
-    return "%03d".format(normalizedId)
-}
-
+@Composable
 private fun LineaPedido.toSummaryText(): String {
     val productName = if (tipoProducto == TipoProducto.MONTADITO) {
-        "${formatMontaditoId(productoId)}. $nombre"
+        stringResource(R.string.numbered_product, formatMontaditoId(productoId), nombre)
     } else {
         nombre
     }
-    return "${cantidad}x $productName - ${formatPrice(subtotal)}"
+    return stringResource(R.string.order_line_summary, cantidad, productName, formatPrice(subtotal))
 }
+
+// Only Bundle-compatible values are saved, including the original unit prices.
+internal val CartLinesSaver = listSaver<SnapshotStateMap<Int, LineaPedido>, Any>(
+    save = { cart ->
+        listOf(cart.size) + cart.values.flatMap { line ->
+            listOf(line.productoId, line.nombre, line.precioUnitario, line.cantidad,
+                line.tipoProducto.name, line.observaciones.orEmpty())
+        }
+    },
+    restore = { saved ->
+        mutableStateMapOf<Int, LineaPedido>().apply {
+            saved.drop(1).chunked(6).forEach { values ->
+                val line = LineaPedido(
+                    productoId = values[0] as Int,
+                    nombre = values[1] as String,
+                    precioUnitario = values[2] as Double,
+                    cantidad = values[3] as Int,
+                    tipoProducto = TipoProducto.valueOf(values[4] as String),
+                    observaciones = (values[5] as String).ifBlank { null }
+                )
+                put(line.productoId, line)
+            }
+        }
+    }
+)

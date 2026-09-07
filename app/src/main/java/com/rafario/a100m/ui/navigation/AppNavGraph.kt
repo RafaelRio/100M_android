@@ -1,7 +1,16 @@
 package com.rafario.a100m.ui.navigation
 
+import androidx.compose.ui.res.stringResource
+import com.rafario.a100m.R
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.rafario.a100m.data.models.Pedido
+import kotlinx.coroutines.CancellationException
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -26,13 +35,58 @@ private object AppRoute {
 
 @Composable
 fun AppNavGraph() {
+
     val navController = rememberNavController()
     val context = LocalContext.current
     val pedidoRepository = remember(context) {
         PedidoRepository(context.applicationContext)
     }
-    val pedidos by pedidoRepository.pedidos.collectAsState(initial = emptyList())
+    var pedidos by remember { mutableStateOf<List<Pedido>?>(null) }
+    var errorMessage by remember { mutableStateOf<Int?>(null) }
+    var readAttempt by remember { mutableStateOf(0) }
+    var isSaving by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(pedidoRepository, readAttempt) {
+        try {
+            pedidoRepository.pedidos.collect { pedidos = it }
+        } catch (error: CancellationException) {
+            throw error
+        } catch (_: Exception) {
+            errorMessage = R.string.storage_read_error
+        }
+    }
+
+
+    fun saveOrder(action: suspend () -> Unit) {
+        if (isSaving) return
+        isSaving = true
+        coroutineScope.launch {
+            try {
+                action()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (_: Exception) {
+                errorMessage = R.string.storage_write_error
+            } finally {
+                isSaving = false
+            }
+        }
+    }
+
+    errorMessage?.let { message ->
+        AlertDialog(
+            onDismissRequest = { errorMessage = null },
+            title = { Text(stringResource(R.string.storage_error)) },
+            text = { Text(stringResource(message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    errorMessage = null
+                    readAttempt++
+                }) { Text(stringResource(R.string.accept)) }
+            }
+        )
+    }
 
     NavHost(
         navController = navController,
@@ -52,9 +106,9 @@ fun AppNavGraph() {
 
         composable(AppRoute.HOME) {
             HomeScreen(
-                pedidos = pedidos,
+                pedidos = pedidos.orEmpty(),
                 onDeleteOrderClick = { pedidoId ->
-                    coroutineScope.launch {
+                    saveOrder {
                         pedidoRepository.deletePedido(pedidoId)
                     }
                 },
@@ -67,15 +121,18 @@ fun AppNavGraph() {
             )
         }
 
-        composable(AppRoute.CREATE_ORDER) {
+        composable(AppRoute.CREATE_ORDER) { backStackEntry ->
             CreateOrderScreen(
+                isSaving = isSaving,
                 onBackClick = {
                     navController.popBackStack()
                 },
                 onOrderSaved = { nombre, lineas ->
-                    coroutineScope.launch {
+                    saveOrder {
                         pedidoRepository.addPedido(nombre, lineas)
-                        navController.popBackStack()
+                        if (navController.currentBackStackEntry == backStackEntry) {
+                            navController.popBackStack()
+                        }
                     }
                 }
             )
@@ -83,9 +140,21 @@ fun AppNavGraph() {
 
         composable("${AppRoute.EDIT_ORDER}/{pedidoId}") { backStackEntry ->
             val pedidoId = backStackEntry.arguments?.getString("pedidoId")?.toIntOrNull()
-            val pedido = pedidos.firstOrNull { it.id == pedidoId }
+            val loadedPedidos = pedidos
+            if (loadedPedidos == null) {
+                Text(stringResource(R.string.loading_order))
+                return@composable
+            }
+            val pedido = loadedPedidos.firstOrNull { it.id == pedidoId }
+            if (pedido == null) {
+                TextButton(onClick = { navController.popBackStack() }) {
+                    Text(stringResource(R.string.order_missing))
+                }
+                return@composable
+            }
 
             CreateOrderScreen(
+                isSaving = isSaving,
                 pedidoToEdit = pedido,
                 onBackClick = {
                     navController.popBackStack()
@@ -96,9 +165,11 @@ fun AppNavGraph() {
                         return@CreateOrderScreen
                     }
 
-                    coroutineScope.launch {
+                    saveOrder {
                         pedidoRepository.updatePedido(pedidoId, nombre, lineas)
-                        navController.popBackStack()
+                        if (navController.currentBackStackEntry == backStackEntry) {
+                            navController.popBackStack()
+                        }
                     }
                 }
             )

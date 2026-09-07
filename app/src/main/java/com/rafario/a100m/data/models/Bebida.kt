@@ -15,15 +15,15 @@ data class Bebida(
     }
 }
 
-enum class TipoBebida(val tipo: String) {
-    CERVEZA("Cerveza"),
-    TINTO_DE_VERANO("Tinto de Verano"),
-    CERVEZA_PREMIUM("Cerveza Premium"),
-    CERVEZA_BOTELLA("Cerveza en Botella"),
-    TARDEO_PREMIUM("Tardeo Premium"),
-    TARDEO_CHILL("Tardeo Chill"),
-    CLASICAS("Clásicas"),
-    ENERGETICAS("Energéticas"),
-    VINO("Vino"),
-    CAFE_INFUSIONES("Café e infusiones")
+enum class TipoBebida {
+    CERVEZA,
+    TINTO_DE_VERANO,
+    CERVEZA_PREMIUM,
+    CERVEZA_BOTELLA,
+    TARDEO_PREMIUM,
+    TARDEO_CHILL,
+    CLASICAS,
+    ENERGETICAS,
+    VINO,
+    CAFE_INFUSIONES
 }

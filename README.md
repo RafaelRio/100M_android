@@ -239,11 +239,11 @@ Si WhatsApp no está instalado, la app abre el selector estándar de Android par
 ## ⚙️ Requisitos
 
 * **Android Studio**
-* **Android SDK 29 o superior**
+* **Android SDK 36.1** para compilar; dispositivo o emulador con Android 10 (API 29) o superior.
 * `minSdk 29`
 * `targetSdk 36`
-* `compileSdk 36`
-* **Java 11**
+* `compileSdk 36`, extensión menor API 1
+* **JDK 17 o superior** para ejecutar Gradle (puedes usar el JDK integrado en Android Studio). El código utiliza compatibilidad Java 11.
 
 ---
 
@@ -276,6 +276,25 @@ app/build/outputs/apk/debug/
 ```
 
 ---
+
+## Verificación
+
+```bash
+./gradlew testDebugUnitTest assembleDebug lintDebug
+```
+
+Las pruebas unitarias comprueban cantidades e importes, precios especiales,
+texto compartido y restauración del carrito. Los cambios en pedidos se realizan
+íntegramente dentro de una transacción de DataStore para evitar sobrescrituras
+entre operaciones simultáneas. El carrito conserva productos, precios y cantidades
+cuando Android recrea la pantalla.
+
+Con un dispositivo o emulador conectado, ejecuta también la prueba de
+persistencia concurrente:
+
+```bash
+./gradlew connectedDebugAndroidTest
+```
 
 ## 📌 Características técnicas destacadas
 

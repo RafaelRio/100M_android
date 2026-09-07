@@ -11,17 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rafario.a100m.R
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun SplashScreen(
     onSplashFinished: () -> Unit
 ) {
     LaunchedEffect(Unit) {
-        delay(1_200)
+        delay(1_200.milliseconds)
         onSplashFinished()
     }
 
@@ -34,13 +37,13 @@ fun SplashScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "100M",
+            text = stringResource(R.string.app_name),
             color = MaterialTheme.colorScheme.onPrimary,
             fontSize = 48.sp,
             fontWeight = FontWeight.Black
         )
         Text(
-            text = "Pide desde tu mesa",
+            text = stringResource(R.string.app_subtitle),
             color = MaterialTheme.colorScheme.onPrimary,
             fontSize = 18.sp
         )

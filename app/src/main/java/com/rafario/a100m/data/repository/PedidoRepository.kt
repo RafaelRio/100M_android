@@ -1,6 +1,8 @@
 package com.rafario.a100m.data.repository
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -8,19 +10,20 @@ import com.rafario.a100m.data.models.LineaPedido
 import com.rafario.a100m.data.models.Pedido
 import com.rafario.a100m.data.models.TipoProducto
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.json.JSONArray
 import org.json.JSONObject
 
 private val Context.pedidosDataStore by preferencesDataStore(name = "pedidos")
 
-class PedidoRepository(
-    private val context: Context
+class PedidoRepository internal constructor(
+    private val dataStore: DataStore<Preferences>
 ) {
+    constructor(context: Context) : this(context.applicationContext.pedidosDataStore)
+
     private val pedidosKey = stringPreferencesKey("pedidos_json")
 
-    val pedidos: Flow<List<Pedido>> = context.pedidosDataStore.data.map { preferences ->
+    val pedidos: Flow<List<Pedido>> = dataStore.data.map { preferences ->
         preferences[pedidosKey]?.toPedidos().orEmpty()
     }
 
@@ -28,24 +31,20 @@ class PedidoRepository(
         nombre: String,
         lineas: List<LineaPedido>
     ) {
-        val currentPedidos = pedidos.first()
-        val nextId = (currentPedidos.maxOfOrNull { it.id } ?: 0) + 1
-        val newPedido = Pedido(
-            id = nextId,
-            nombre = nombre,
-            lineas = lineas
-        )
-
-        context.pedidosDataStore.edit { preferences ->
+        require(nombre.isNotBlank()) { "El pedido necesita un nombre" }
+        require(lineas.isNotEmpty()) { "El pedido necesita productos" }
+        dataStore.edit { preferences ->
+            val currentPedidos = preferences[pedidosKey]?.toPedidos().orEmpty()
+            val nextId = (currentPedidos.maxOfOrNull { it.id } ?: 0) + 1
+            val newPedido = Pedido(nextId, nombre.trim(), lineas)
             preferences[pedidosKey] = (currentPedidos + newPedido).toJson()
         }
     }
 
     suspend fun deletePedido(pedidoId: Int) {
-        val updatedPedidos = pedidos.first().filterNot { it.id == pedidoId }
-
-        context.pedidosDataStore.edit { preferences ->
-            preferences[pedidosKey] = updatedPedidos.toJson()
+        dataStore.edit { preferences ->
+            val currentPedidos = preferences[pedidosKey]?.toPedidos().orEmpty()
+            preferences[pedidosKey] = currentPedidos.filterNot { it.id == pedidoId }.toJson()
         }
     }
 
@@ -54,19 +53,18 @@ class PedidoRepository(
         nombre: String,
         lineas: List<LineaPedido>
     ) {
-        val updatedPedidos = pedidos.first().map { pedido ->
-            if (pedido.id == pedidoId) {
-                pedido.copy(
-                    nombre = nombre,
-                    lineas = lineas
-                )
-            } else {
-                pedido
-            }
-        }
-
-        context.pedidosDataStore.edit { preferences ->
-            preferences[pedidosKey] = updatedPedidos.toJson()
+        require(nombre.isNotBlank()) { "El pedido necesita un nombre" }
+        require(lineas.isNotEmpty()) { "El pedido necesita productos" }
+        dataStore.edit { preferences ->
+            val currentPedidos = preferences[pedidosKey]?.toPedidos().orEmpty()
+            require(currentPedidos.any { it.id == pedidoId }) { "El pedido ya no existe" }
+            preferences[pedidosKey] = currentPedidos.map { pedido ->
+                if (pedido.id == pedidoId) {
+                    pedido.copy(nombre = nombre.trim(), lineas = lineas)
+                } else {
+                    pedido
+                }
+            }.toJson()
         }
     }
 }
@@ -128,7 +126,7 @@ private fun JSONObject.toLineaPedido(): LineaPedido {
         precioUnitario = getDouble("precioUnitario"),
         cantidad = getInt("cantidad"),
         tipoProducto = optString("tipoProducto").toTipoProducto(),
-        observaciones = optString("observaciones").ifBlank { null }
+        observaciones = if (isNull("observaciones")) null else optString("observaciones").ifBlank { null }
     )
 }
 

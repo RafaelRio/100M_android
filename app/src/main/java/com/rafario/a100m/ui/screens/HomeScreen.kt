@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Whatsapp
@@ -26,11 +27,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.res.stringResource
+import com.rafario.a100m.R
+import com.rafario.a100m.ui.formatting.formatMontaditoId
+import com.rafario.a100m.ui.formatting.formatPrice
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +49,6 @@ import com.rafario.a100m.data.datasource.CatalogoDataSource
 import com.rafario.a100m.data.models.LineaPedido
 import com.rafario.a100m.data.models.Pedido
 import com.rafario.a100m.data.models.TipoProducto
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +62,7 @@ fun HomeScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Mis pedidos")
+                    Text(text = stringResource(R.string.my_orders))
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -71,11 +74,7 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = onCreateOrderClick
             ) {
-                Text(
-                    text = "+",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold
-                )
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.create_order))
             }
         }
     ) { innerPadding ->
@@ -83,7 +82,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 88.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (pedidos.isEmpty()) {
@@ -157,12 +156,12 @@ private fun OrderCard(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
-                        text = pedido.nombre.ifBlank { "Sin nombre" },
+                        text = pedido.nombre.takeIf { it.isNotBlank() } ?: stringResource(R.string.unnamed_order),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Pedido #${pedido.id}",
+                        text = stringResource(R.string.order_number, pedido.id),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -196,7 +195,7 @@ private fun OrderCard(
                     contentDescription = null
                 )
                 Text(
-                    text = "Compartir por WhatsApp",
+                    text = stringResource(R.string.share_whatsapp),
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -210,7 +209,7 @@ private fun OrderCard(
                     contentDescription = null
                 )
                 Text(
-                    text = "Editar pedido",
+                    text = stringResource(R.string.edit_order),
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -226,7 +225,7 @@ private fun OrderCard(
                     contentDescription = null
                 )
                 Text(
-                    text = "Eliminar pedido",
+                    text = stringResource(R.string.delete_order),
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -243,21 +242,21 @@ private fun DeleteOrderDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(text = "Eliminar pedido")
+            Text(text = stringResource(R.string.delete_order))
         },
         text = {
             Text(
-                text = "¿Seguro que quieres eliminar \"${pedido.nombre}\"? Esta acción no se puede deshacer."
+                text = stringResource(R.string.delete_order_confirmation, pedido.nombre)
             )
         },
         confirmButton = {
             Button(onClick = onConfirm) {
-                Text(text = "Eliminar")
+                Text(text = stringResource(R.string.delete))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = "Cancelar")
+                Text(text = stringResource(R.string.cancel))
             }
         }
     )
@@ -272,7 +271,7 @@ private fun OrderLine(
     } else {
         Column {
             Text(
-                text = "${linea.cantidad}x ${linea.nombre}",
+                text = stringResource(R.string.product_quantity_name, linea.cantidad, linea.nombre),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -297,13 +296,13 @@ private fun MontaditoOrderLine(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "${linea.cantidad}x",
+                text = stringResource(R.string.product_quantity, linea.cantidad),
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = "${linea.productoId}. ${linea.nombre}",
+                text = stringResource(R.string.numbered_product, formatMontaditoId(linea.productoId), linea.nombre),
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -322,19 +321,15 @@ private fun EmptyOrdersContent() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Todavía no hay pedidos",
+            text = stringResource(R.string.empty_orders),
             style = MaterialTheme.typography.titleLarge
         )
         Text(
-            text = "Pulsa + para crear el primero.",
+            text = stringResource(R.string.empty_orders_hint),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
-}
-
-private fun formatPrice(price: Double): String {
-    return String.format(Locale.forLanguageTag("es-ES"), "%.2f €", price)
 }
 
 private fun sharePedidoByWhatsApp(
@@ -343,7 +338,7 @@ private fun sharePedidoByWhatsApp(
 ) {
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
-        putExtra(Intent.EXTRA_TEXT, pedido.toShareText())
+        putExtra(Intent.EXTRA_TEXT, pedido.toShareText(context))
         setPackage("com.whatsapp")
     }
 
@@ -353,17 +348,17 @@ private fun sharePedidoByWhatsApp(
         val fallbackIntent = Intent.createChooser(
             Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, pedido.toShareText())
+                putExtra(Intent.EXTRA_TEXT, pedido.toShareText(context))
             },
-            "Compartir pedido"
+            context.getString(R.string.share_order)
         )
         context.startActivity(fallbackIntent)
     }
 }
 
-private fun Pedido.toShareText(): String {
+internal fun Pedido.toShareText(context: Context): String {
     return buildString {
-        appendLine("Pedido #$id")
+        appendLine(context.getString(R.string.order_number, id))
         if (nombre.isNotBlank()) {
             appendLine(nombre)
         }
@@ -372,24 +367,24 @@ private fun Pedido.toShareText(): String {
         val montaditoIds = lineas
             .filter { it.tipoProducto == TipoProducto.MONTADITO }
             .flatMap { line ->
-                List(line.cantidad) { line.productoId }
+                List(line.cantidad) { formatMontaditoId(line.productoId) }
             }
 
         if (montaditoIds.isNotEmpty()) {
-            appendLine("Montaditos: ${montaditoIds.joinToString(", ")}")
+            appendLine(context.getString(R.string.share_montaditos, montaditoIds.joinToString(", ")))
         }
 
         lineas
             .filterNot { it.tipoProducto == TipoProducto.MONTADITO }
             .forEach { linea ->
-                appendLine("${linea.cantidad}x ${linea.nombre}")
+                appendLine(context.getString(R.string.product_quantity_name, linea.cantidad, linea.nombre))
                 linea.descripcionAperitivo()?.let { descripcion ->
                     appendLine("  $descripcion")
                 }
             }
 
         appendLine()
-        append("Total: ${formatPrice(total)}")
+        append(context.getString(R.string.order_total, formatPrice(total)))
     }
 }
 
